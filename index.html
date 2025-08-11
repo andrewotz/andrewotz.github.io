@@ -4,29 +4,47 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Andrew Otzenberger | Portfolio</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<meta name="description" content="Andrew Otzenberger - Computer Science student, nationally ranked tennis player, and aspiring software engineer. Portfolio showcasing projects, experience, and achievements." />
+<meta property="og:title" content="Andrew Otzenberger | Portfolio" />
+<meta property="og:description" content="Explore Andrew's projects in scientific computing, web scraping, and physics visualization, plus elite tennis achievements." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yourcustomdomain.com" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/12345678?v=4" />
+
 <style>
   :root {
     --color-bg-light: #f9f9f9;
     --color-bg-dark: #121212;
+    --color-bg-dark-header: #0d0d0d;
     --color-text-light: #222;
     --color-text-dark: #eee;
-    --color-accent: #5c6ac4; /* softer indigo */
-    --color-accent-hover: #4a56b8;
+    --color-text-dark-header: #fafafa;
+    --color-accent: #5c52b2; /* softer purple */
     --transition-speed: 0.3s;
+    --card-bg-light: #e0e7ff;
+    --card-bg-dark: #1e1e2f;
+    --card-shadow-light: rgba(92, 82, 178, 0.3);
+    --card-shadow-dark: rgba(92, 82, 178, 0.6);
   }
 
-  /* Reset & base */
-  * {
-    box-sizing: border-box;
-  }
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--color-bg-light);
     color: var(--color-text-light);
     transition: background-color var(--transition-speed), color var(--transition-speed);
-    scroll-behavior: smooth;
   }
+
   body.dark {
     background-color: var(--color-bg-dark);
     color: var(--color-text-dark);
@@ -36,322 +54,45 @@
     padding: 2rem 1rem 1rem;
     text-align: center;
     border-bottom: 1px solid #ccc;
-    position: sticky;
-    top: 0;
-    background-color: var(--color-bg-light);
-    z-index: 100;
-    transition: box-shadow var(--transition-speed), background-color var(--transition-speed);
+    background-color: transparent;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
   }
-  header.dark {
-    background-color: var(--color-bg-dark);
+
+  body.dark header {
+    background-color: var(--color-bg-dark-header);
     border-color: #444;
+    color: var(--color-text-dark-header);
   }
+
   header.scrolled {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   }
 
   h1 {
     margin: 0;
-    font-size: 2.6rem;
+    font-size: 2.5rem;
     font-weight: 700;
   }
-  h2 {
-    margin-top: 0;
-    color: var(--color-accent);
-    font-weight: 700;
-    font-size: 2rem;
+
+  body.dark h1 {
+    color: var(--color-text-dark-header);
   }
 
   p {
+    max-width: 600px;
+    margin: 0.5rem auto 0;
     line-height: 1.5;
   }
 
-  /* Resume button */
-  .resume-btn {
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.55rem 1.3rem;
-    background-color: var(--color-accent);
-    color: white;
-    font-weight: 600;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 6px rgb(92 106 196 / 0.3);
-    cursor: pointer;
-  }
-  .resume-btn:hover,
-  .resume-btn:focus {
-    background-color: var(--color-accent-hover);
-    outline: none;
-    box-shadow: 0 3px 8px rgb(74 86 184 / 0.5);
+  body.dark p {
+    color: var(--color-text-dark-header);
   }
 
-  /* Portrait */
-  #portrait-container {
-    max-width: 220px;
-    margin: 2rem auto 3rem;
-    border-radius: 9999px;
-    overflow: hidden;
-  }
-  #portrait-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: none;
-    box-shadow: none;
-    border-radius: 9999px;
-    user-select: none;
-  }
-
-  main {
-    max-width: 900px;
-    margin: 0 auto 4rem;
-    padding: 0 1rem;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  /* Lists for projects & experiences */
-  ul.projects,
-  ul.experiences {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
-    gap: 1.5rem;
-  }
-
-  ul.projects li,
-  ul.experiences li {
-    background: #e0e7ff;
-    padding: 1.25rem 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgb(92 106 196 / 0.15);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    cursor: default;
-  }
-  body.dark ul.projects li,
-  body.dark ul.experiences li {
-    background: #1e1e2f;
-    box-shadow: 0 4px 10px rgb(92 106 196 / 0.6);
-  }
-  ul.projects li.visible,
-  ul.experiences li.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Project titles and descriptions */
-  .project-title,
-  .experience-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0 0 0.4rem 0;
-  }
-  .project-desc,
-  .experience-desc {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.3;
-  }
-
-  /* Project screenshots */
-  .project-screenshot {
-    margin-top: 0.8rem;
-    border-radius: 8px;
-    max-width: 100%;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgb(92 106 196 / 0.15);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .project-screenshot:hover,
-  .project-screenshot:focus {
-    transform: scale(1.03);
-    box-shadow: 0 5px 15px rgb(74 86 184 / 0.35);
-    outline: none;
-  }
-
-  /* Links */
-  a.project-link {
+  h2 {
+    margin-top: 0;
     color: var(--color-accent);
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  a.project-link:hover,
-  a.project-link:focus {
-    color: var(--color-accent-hover);
-    outline: none;
-    text-decoration: underline;
   }
 
-  /* Tennis achievements as cards */
-  ul.tennis {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.25rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  ul.tennis li {
-    background: #f3f4f6;
-    padding: 1rem 1.2rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgb(92 106 196 / 0.12);
-    position: relative;
-    cursor: pointer;
-    font-weight: 600;
-    color: #2c3e50;
-    user-select: none;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-  }
-  body.dark ul.tennis li {
-    background: #2c2f4a;
-    color: #cfd2ff;
-    box-shadow: 0 3px 8px rgb(92 106 196 / 0.5);
-  }
-  ul.tennis li:hover,
-  ul.tennis li:focus {
-    background-color: #dbe2ff;
-    box-shadow: 0 7px 15px rgb(92 106 196 / 0.35);
-    outline: none;
-  }
-  body.dark ul.tennis li:hover,
-  body.dark ul.tennis li:focus {
-    background-color: #42486e;
-  }
-
-  /* Details for tennis cards */
-  .details {
-    margin-top: 0.5rem;
-    font-weight: normal;
-    font-size: 0.9rem;
-    color: #555;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.35s ease;
-  }
-  body.dark .details {
-    color: #aaa;
-  }
-  ul.tennis li.show-details .details {
-    max-height: 200px; /* enough to show */
-    opacity: 1;
-  }
-  .close-details {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    font-size: 1.3rem;
-    cursor: pointer;
-    color: #999;
-    font-weight: 700;
-    line-height: 1;
-    transition: color 0.2s ease;
-  }
-  .close-details:hover,
-  .close-details:focus {
-    color: var(--color-accent);
-    outline: none;
-  }
-
-  /* Contact form */
-  #contact {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  label {
-    font-weight: 600;
-    margin-top: 1rem;
-  }
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    margin-top: 0.25rem;
-    padding: 0.6rem 0.8rem;
-    border: 1.5px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 8px rgb(92 106 196 / 0.3);
-  }
-  textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-  #contact-form button[type="submit"] {
-    margin-top: 1.5rem;
-    background-color: var(--color-accent);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.8rem;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 6px rgb(92 106 196 / 0.3);
-  }
-  #contact-form button[type="submit"]:hover,
-  #contact-form button[type="submit"]:focus {
-    background-color: var(--color-accent-hover);
-    outline: none;
-    box-shadow: 0 3px 8px rgb(74 86 184 / 0.5);
-  }
-  .success-message {
-    margin-top: 1rem;
-    color: green;
-    font-weight: 600;
-  }
-
-  /* Dark mode tweaks */
-  body.dark #contact input[type="text"],
-  body.dark #contact input[type="email"],
-  body.dark #contact textarea {
-    background-color: #222;
-    border-color: #555;
-    color: #eee;
-  }
-  body.dark #contact input[type="text"]:focus,
-  body.dark #contact input[type="email"]:focus,
-  body.dark #contact textarea:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 8px rgb(92 106 196 / 0.5);
-  }
-
-  /* Dark mode footer */
-  footer {
-    text-align: center;
-    padding: 1rem 0;
-    color: #888;
-    border-top: 1px solid #ccc;
-    font-size: 0.9rem;
-  }
-  body.dark footer {
-    border-color: #444;
-    color: #aaa;
-  }
-
-  /* Dark mode toggle button */
   .toggle-btn {
     position: fixed;
     top: 1rem;
@@ -364,132 +105,296 @@
     border-radius: 5px;
     font-weight: 600;
     transition: background 0.3s;
-    z-index: 1100;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+    z-index: 1000;
   }
-  .toggle-btn:hover,
-  .toggle-btn:focus {
-    background: var(--color-accent-hover);
+
+  .toggle-btn:hover {
+    background: #473b91;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  ul.projects, ul.tennis, ul.experiences {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+
+  ul.projects li, ul.tennis li, ul.experiences li {
+    background: var(--card-bg-light);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--card-shadow-light);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: default;
+  }
+
+  ul.projects li:hover, ul.tennis li:hover, ul.experiences li:hover,
+  ul.projects li:focus-within, ul.tennis li:focus-within, ul.experiences li:focus-within {
+    box-shadow: 0 8px 20px var(--card-shadow-light);
+    transform: scale(1.03);
     outline: none;
   }
-  .toggle-btn svg {
-    height: 18px;
-    fill: white;
-    transition: transform 0.4s ease;
-  }
-  body.dark .toggle-btn svg {
-    transform: rotate(180deg);
+
+  body.dark ul.projects li, body.dark ul.tennis li, body.dark ul.experiences li {
+    background: var(--card-bg-dark);
+    box-shadow: 0 2px 8px var(--card-shadow-dark);
+    color: var(--color-text-dark);
   }
 
-  /* Responsive */
-  @media (max-width: 720px) {
-    header h1 {
-      font-size: 2.4rem;
-    }
-    h2 {
-      font-size: 1.75rem;
-    }
-    ul.projects,
-    ul.experiences {
-      grid-template-columns: 1fr;
-    }
-    ul.tennis {
-      grid-template-columns: 1fr;
-      max-width: 100%;
-      padding: 0;
-    }
-    #portrait-container {
-      max-width: 200px;
-      margin-bottom: 2rem;
-    }
-    main {
-      margin: 2rem 1rem 3rem;
-    }
+  body.dark ul.projects li:hover, body.dark ul.tennis li:hover, body.dark ul.experiences li:hover,
+  body.dark ul.projects li:focus-within, body.dark ul.tennis li:focus-within, body.dark ul.experiences li:focus-within {
+    box-shadow: 0 8px 20px var(--card-shadow-dark);
   }
 
-  /* Modal overlay for project screenshot zoom */
+  a.project-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a.project-link:hover,
+  a.project-link:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+
+  .project-title, .experience-title {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .project-desc, .experience-desc {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  ul.tennis li {
+    position: relative;
+  }
+
+  ul.tennis li > button.close-details {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    background: transparent;
+    border: none;
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  ul.tennis li .details {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: #666;
+    display: none;
+  }
+
+  ul.tennis li.show-details .details {
+    display: block;
+  }
+
+  ul.tennis li.show-details > button.close-details {
+    display: inline;
+  }
+
+  body.dark ul.tennis li .details {
+    color: #bbb;
+  }
+
+  #contact label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  #contact input,
+  #contact textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  #contact input:focus,
+  #contact textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  #contact button[type="submit"] {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background-color: var(--color-accent);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #contact button[type="submit"]:hover,
+  #contact button[type="submit"]:focus {
+    background-color: #473b91;
+    outline: none;
+  }
+
+  .error-message {
+    color: #d93025;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+    display: block;
+    min-height: 1.2em;
+  }
+
+  .success-message {
+    margin-top: 1rem;
+    color: #188038;
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: #888;
+    border-top: 1px solid #ccc;
+  }
+
+  body.dark footer {
+    border-color: #444;
+    color: #aaa;
+  }
+
+  /* Modal for screenshots */
   .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
+    right:0;
+    bottom: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
     justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
     z-index: 2000;
   }
+
   .modal-overlay.active {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
   }
+
   .modal-content {
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
   }
+
   .modal-content img {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.8);
   }
+
   .modal-close-btn {
     position: absolute;
-    top: -12px;
-    right: -12px;
+    top: -10px;
+    right: -10px;
     background: var(--color-accent);
-    color: white;
     border: none;
+    color: white;
     font-size: 1.8rem;
     font-weight: 700;
     cursor: pointer;
     border-radius: 50%;
     width: 36px;
     height: 36px;
-    line-height: 32px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgb(92 106 196 / 0.5);
-    transition: background-color 0.3s ease;
+    line-height: 34px;
   }
+
   .modal-close-btn:hover,
   .modal-close-btn:focus {
-    background-color: var(--color-accent-hover);
+    background: #473b91;
     outline: none;
+  }
+
+  /* Portrait style */
+  .portrait {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 1rem auto;
+    box-shadow: none; /* Removed purple glow */
+  }
+
+  /* Project screenshots */
+  .project-screenshot {
+    margin-top: 0.75rem;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-screenshot:hover,
+  .project-screenshot:focus {
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    outline: none;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
   }
 </style>
 </head>
 <body>
-
-<button aria-label="Toggle dark/light mode" class="toggle-btn" title="Toggle dark/light mode">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
-    <path d="M12 3a9 9 0 0 0 0 18 9 9 0 0 0 0-18Zm0 16a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/>
-  </svg>
-  Dark Mode
-</button>
+<button class="toggle-btn" aria-label="Toggle dark/light mode">Dark Mode</button>
 
 <header>
   <h1>Andrew Otzenberger</h1>
   <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
-  <a href="/Andrew_Otzenberger_Resume.pdf" download class="resume-btn" aria-label="Download Andrew Otzenberger's Resume">Download Resume</a>
+  <img
+    src="https://avatars.githubusercontent.com/u/12345678?v=4"
+    alt="Portrait of Andrew Otzenberger"
+    class="portrait"
+    loading="lazy"
+  />
+  <a href="/Andrew_Otzenberger_Resume.pdf" download class="resume-btn" style="display:block; margin:0.5rem auto; text-align:center; font-weight:600; color: var(--color-accent); text-decoration:none; cursor:pointer;">Download Resume</a>
 </header>
 
 <main>
-
-  <!-- Portrait -->
-  <section id="portrait-container" tabindex="0" aria-label="Portrait of Andrew Otzenberger">
-    <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="Portrait photo of Andrew Otzenberger" loading="lazy" />
-  </section>
-
   <section id="about">
     <h2>About Me</h2>
     <p>
       Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
       As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
-    </p>
-    <p>
       My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
       I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
     </p>
@@ -497,8 +402,7 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <ul class="projects">
-
+    <ul class="projects" role="list" aria-label="Projects">
       <li tabindex="0" aria-describedby="proj-desc-1">
         <p class="project-title">
           <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">EMP Pulse and Circuit Response Simulator</a>
@@ -526,7 +430,6 @@
         <p id="proj-desc-3" class="project-desc">
           Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
         </p>
-        <!-- No screenshot for this project -->
       </li>
 
       <li tabindex="0" aria-describedby="proj-desc-4">
@@ -551,7 +454,7 @@
 
   <section id="experiences">
     <h2>Experiences</h2>
-    <ul class="experiences">
+    <ul class="experiences" role="list" aria-label="Experiences">
       <li tabindex="0" aria-describedby="exp-desc-1">
         <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
         <p id="exp-desc-1" class="experience-desc">
@@ -573,13 +476,13 @@
       <li tabindex="0" aria-describedby="exp-desc-4">
         <p class="experience-title">Web Scraping & Data Analyst - Independent Projects</p>
         <p id="exp-desc-4" class="experience-desc">
-          Created automated Python tools to scrape, clean, and analyze real-time datasets for market and scientific insights.
+          Created automated Python tools to collect and analyze real-time data, delivering actionable insights for research and personal projects.
         </p>
       </li>
       <li tabindex="0" aria-describedby="exp-desc-5">
-        <p class="experience-title">CERN Visit & Scientific Computing Exploration</p>
+        <p class="experience-title">Technical Volunteer - Local Science Outreach</p>
         <p id="exp-desc-5" class="experience-desc">
-          Immersed in particle physics environment, gaining inspiration and perspective on large-scale scientific data analysis and computing.
+          Assisted in coding workshops and science fairs, helping students understand computational physics and programming concepts.
         </p>
       </li>
     </ul>
@@ -587,244 +490,153 @@
 
   <section id="tennis">
     <h2>Tennis Achievements</h2>
-    <ul class="tennis" role="list" aria-label="Tennis achievements">
-      <li tabindex="0" aria-expanded="false" role="button" aria-controls="detail-1" aria-describedby="desc-1">
-        NAIA Men’s Singles Nationally Ranked #24
-        <button class="close-details" aria-label="Hide details" hidden>&times;</button>
-        <div class="details" id="detail-1" aria-live="polite">
-          Ranked among the nation’s top players with consistent tournament success and disciplined training.
-        </div>
-      </li>
-      <li tabindex="0" aria-expanded="false" role="button" aria-controls="detail-2" aria-describedby="desc-2">
-        Former NCAA Division I Men's Tennis Athlete
-        <button class="close-details" aria-label="Hide details" hidden>&times;</button>
-        <div class="details" id="detail-2" aria-live="polite">
-          Competed at the highest collegiate level, balancing academics and athletic excellence.
-        </div>
-      </li>
-      <li tabindex="0" aria-expanded="false" role="button" aria-controls="detail-3" aria-describedby="desc-3">
-        Competitive mindset and discipline from elite college-level sports
-        <button class="close-details" aria-label="Hide details" hidden>&times;</button>
-        <div class="details" id="detail-3" aria-live="polite">
-          Leadership, focus, and resilience developed through years of intense competition.
-        </div>
-      </li>
+    <ul class="tennis" role="list" aria-label="Tennis Achievements">
+      <li tabindex="0">NAIA Men’s Singles Nationally Ranked #24</li>
+      <li tabindex="0">Former NCAA Division I Men's Tennis Athlete</li>
+      <li tabindex="0">Competitive mindset and discipline from elite college-level sports</li>
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact Me</h2>
-    <form id="contact-form" novalidate aria-describedby="form-status" aria-live="polite">
+    <form id="contact-form" novalidate>
       <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required aria-required="true" placeholder="Your full name" autocomplete="name" />
-      <span class="error-message" aria-live="assertive"></span>
+      <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" />
+      <span id="name-error" class="error-message" aria-live="polite"></span>
 
       <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required aria-required="true" placeholder="you@example.com" autocomplete="email" />
-      <span class="error-message" aria-live="assertive"></span>
+      <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" />
+      <span id="email-error" class="error-message" aria-live="polite"></span>
 
       <label for="message">Message *</label>
-      <textarea id="message" name="message" required aria-required="true" placeholder="Write your message here..." rows="5"></textarea>
-      <span class="error-message" aria-live="assertive"></span>
+      <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
+      <span id="message-error" class="error-message" aria-live="polite"></span>
 
-      <button type="submit" aria-label="Send message">Send Message</button>
-
-      <div id="form-status" class="success-message" role="alert" aria-live="polite" hidden></div>
+      <button type="submit">Send Message</button>
+      <div id="form-success" class="success-message" role="alert" aria-live="assertive" style="display:none;">Thank you! Your message has been sent.</div>
     </form>
   </section>
-
 </main>
 
 <footer>
-  <p>© 2025 Andrew Otzenberger | 
-    <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | 
-    <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  </p>
+  <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
 </footer>
 
-<!-- Modal for zoomed screenshot -->
-<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+<!-- Modal for screenshot preview -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
   <div class="modal-content">
-    <button class="modal-close-btn" aria-label="Close image">&times;</button>
+    <button class="modal-close-btn" aria-label="Close image preview">&times;</button>
     <img src="" alt="" id="modal-img" />
   </div>
 </div>
 
 <script>
-  // Dark mode toggle
   const toggleBtn = document.querySelector('.toggle-btn');
   const body = document.body;
-  const toggleIcon = toggleBtn.querySelector('svg');
 
-  // Initialize dark mode based on preference or saved setting
-  const savedTheme = localStorage.getItem('theme');
-  if(savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  // Initialize based on user preference or default to light
+  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     body.classList.add('dark');
     toggleBtn.textContent = 'Light Mode';
-    toggleBtn.prepend(toggleIcon);
-  } else {
-    toggleBtn.textContent = 'Dark Mode';
-    toggleBtn.prepend(toggleIcon);
   }
 
   toggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark');
     if(body.classList.contains('dark')) {
       toggleBtn.textContent = 'Light Mode';
-      toggleBtn.prepend(toggleIcon);
-      localStorage.setItem('theme', 'dark');
     } else {
       toggleBtn.textContent = 'Dark Mode';
-      toggleBtn.prepend(toggleIcon);
-      localStorage.setItem('theme', 'light');
     }
   });
 
-  // Add box-shadow to header on scroll
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if(window.scrollY > 10) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  // Fade in cards on scroll
-  function fadeInOnScroll() {
-    const items = document.querySelectorAll('ul.projects li, ul.experiences li');
-    const triggerBottom = window.innerHeight * 0.85;
-
-    items.forEach(item => {
-      const top = item.getBoundingClientRect().top;
-      if(top < triggerBottom) {
-        item.classList.add('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', fadeInOnScroll);
-  window.addEventListener('load', fadeInOnScroll);
-
-  // Tennis achievements details toggle
-  const tennisCards = document.querySelectorAll('ul.tennis li');
-  tennisCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const isExpanded = card.getAttribute('aria-expanded') === 'true';
-      tennisCards.forEach(c => {
-        c.setAttribute('aria-expanded', 'false');
-        c.classList.remove('show-details');
-        c.querySelector('button.close-details').hidden = true;
-      });
-      if(!isExpanded) {
-        card.setAttribute('aria-expanded', 'true');
-        card.classList.add('show-details');
-        card.querySelector('button.close-details').hidden = false;
-      }
-    });
-
-    const closeBtn = card.querySelector('button.close-details');
-    closeBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      card.setAttribute('aria-expanded', 'false');
-      card.classList.remove('show-details');
-      closeBtn.hidden = true;
-      card.focus();
-    });
-
-    // Keyboard accessibility: toggle with Enter or Space
-    card.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-
-  // Contact form validation and submission
-  const form = document.getElementById('contact-form');
-  const formStatus = document.getElementById('form-status');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    clearErrors();
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-
-    let valid = true;
-
-    if(!name) {
-      setError(form.name, "Please enter your name.");
-      valid = false;
-    }
-    if(!email || !validateEmail(email)) {
-      setError(form.email, "Please enter a valid email.");
-      valid = false;
-    }
-    if(!message) {
-      setError(form.message, "Please enter a message.");
-      valid = false;
-    }
-
-    if(valid) {
-      // Normally here you'd send data to server/API
-      // For demo: just clear and show success
-      form.reset();
-      formStatus.textContent = "Thank you! Your message has been sent.";
-      formStatus.hidden = false;
-      form.name.focus();
-    } else {
-      formStatus.textContent = "";
-      formStatus.hidden = true;
-    }
-  });
-
-  function setError(field, message) {
-    const span = field.nextElementSibling;
-    span.textContent = message;
-  }
-  function clearErrors() {
-    const spans = form.querySelectorAll('.error-message');
-    spans.forEach(s => s.textContent = "");
-  }
-  function validateEmail(email) {
-    // Simple regex for email validation
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  // Modal for zooming project screenshots
-  const modal = document.querySelector('.modal-overlay');
+  // Modal image preview logic
+  const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modal-img');
   const modalCloseBtn = modal.querySelector('.modal-close-btn');
 
   document.querySelectorAll('.project-screenshot').forEach(img => {
-    img.addEventListener('click', () => openModal(img));
-    img.addEventListener('keydown', e => {
+    img.addEventListener('click', () => {
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+      modal.classList.add('active');
+      modal.focus();
+    });
+    img.addEventListener('keydown', (e) => {
       if(e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        openModal(img);
+        img.click();
       }
     });
   });
 
-  function openModal(img) {
-    modalImg.src = img.src;
-    modalImg.alt = img.alt;
-    modal.classList.add('active');
-    modalCloseBtn.focus();
-  }
-  function closeModal() {
+  modalCloseBtn.addEventListener('click', () => {
     modal.classList.remove('active');
     modalImg.src = '';
     modalImg.alt = '';
-  }
-  modalCloseBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => {
-    if(e.target === modal) closeModal();
   });
-  window.addEventListener('keydown', e => {
-    if(e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
+
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) {
+      modalCloseBtn.click();
+    }
+  });
+
+  modal.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+      modalCloseBtn.click();
+    }
+  });
+
+  // Contact form validation and simple submission (dummy example)
+  const form = document.getElementById('contact-form');
+  const nameInput = form.name;
+  const emailInput = form.email;
+  const messageInput = form.message;
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const messageError = document.getElementById('message-error');
+  const formSuccess = document.getElementById('form-success');
+
+  function validateEmail(email) {
+    // Basic email pattern
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    if(nameInput.value.trim() === '') {
+      nameError.textContent = 'Please enter your name.';
+      valid = false;
+    } else {
+      nameError.textContent = '';
+    }
+
+    if(emailInput.value.trim() === '') {
+      emailError.textContent = 'Please enter your email.';
+      valid = false;
+    } else if(!validateEmail(emailInput.value.trim())) {
+      emailError.textContent = 'Please enter a valid email.';
+      valid = false;
+    } else {
+      emailError.textContent = '';
+    }
+
+    if(messageInput.value.trim() === '') {
+      messageError.textContent = 'Please enter your message.';
+      valid = false;
+    } else {
+      messageError.textContent = '';
+    }
+
+    if(valid) {
+      // For demo: reset and show success message
+      form.reset();
+      formSuccess.style.display = 'block';
+      setTimeout(() => {
+        formSuccess.style.display = 'none';
+      }, 6000);
     }
   });
 </script>
