@@ -1,343 +1,461 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Andrew Otzenberger | Portfolio</title>
-<style>
-  /* Root Colors & Variables */
-  :root {
-    --color-bg-light: #f9f9fb;
-    --color-bg-dark: #121212;
-    --color-text-light: #222;
-    --color-text-dark: #eee;
-    --color-accent: #4f46e5;
-    --color-accent-light: #6366f1;
-    --color-card-bg-light: #ffffff;
-    --color-card-bg-dark: #1e1e2f;
-    --color-shadow-light: rgba(0, 0, 0, 0.1);
-    --color-shadow-dark: rgba(0, 0, 0, 0.8);
-    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --transition-speed: 0.35s;
-    --border-radius: 12px;
-    --max-width: 900px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andrew Otzenberger | Portfolio</title>
+  <style>
+    /* Root Variables */
+    :root {
+      --color-bg-light: #f9f9fb;
+      --color-bg-dark: #121212;
+      --color-text-light: #222;
+      --color-text-dark: #eee;
+      --color-accent: #4f46e5;
+      --color-accent-light: #6366f1;
+      --color-card-bg-light: #ffffff;
+      --color-card-bg-dark: #1e1e2f;
+      --color-shadow-light: rgba(0, 0, 0, 0.1);
+      --color-shadow-dark: rgba(0, 0, 0, 0.8);
+      --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, system-ui;
+      --transition-speed: 0.35s;
+      --border-radius: 12px;
+      --max-width: 900px;
+      --gradient-light: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+      --gradient-dark: linear-gradient(135deg, #1a1a2e, #27294d);
+    }
 
-  /* Base Reset */
-  * {
-    box-sizing: border-box;
-  }
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-  body {
-    margin: 0;
-    font-family: var(--font-sans);
-    background-color: var(--color-bg-light);
-    color: var(--color-text-light);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--gradient-light);
+      color: var(--color-text-light);
+      transition: background-color var(--transition-speed), color var(--transition-speed), background var(--transition-speed);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
 
-  body.dark {
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-dark);
-  }
+    body.dark {
+      background: var(--gradient-dark);
+      color: var(--color-text-dark);
+    }
 
-  a {
-    color: var(--color-accent);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-  }
-  a:hover,
-  a:focus {
-    color: var(--color-accent-light);
-    outline: none;
-    text-decoration: underline;
-  }
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    a:hover,
+    a:focus {
+      color: var(--color-accent-light);
+      outline: none;
+      text-decoration: underline;
+    }
 
-  header {
-    padding: 3rem 1.5rem 2rem;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    transition: border-color var(--transition-speed);
-    background: transparent;
-  }
+    header {
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+      position: sticky;
+      top: 0;
+      background-color: var(--color-card-bg-light);
+      z-index: 999;
+      backdrop-filter: saturate(180%) blur(8px);
+      -webkit-backdrop-filter: saturate(180%) blur(8px);
+      box-shadow: none;
+    }
 
-  body.dark header {
-    border-color: #333;
-  }
+    body.dark header {
+      border-color: #333;
+      background-color: var(--color-card-bg-dark);
+      box-shadow: none;
+    }
 
-  h1 {
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
+    header.scrolled {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
 
-  h2 {
-    color: var(--color-accent);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-  }
-
-  header p {
-    margin-top: 0.5rem;
-    font-size: 1.125rem;
-    color: #555;
-  }
-
-  body.dark header p {
-    color: #bbb;
-  }
-
-  main {
-    max-width: var(--max-width);
-    margin: 2.5rem auto 4rem;
-    padding: 0 1.5rem;
-  }
-
-  section {
-    margin-bottom: 4rem;
-  }
-
-  /* Card Styles for Projects, Tennis, Experiences */
-  ul.projects,
-  ul.tennis,
-  ul.experiences {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.75rem 1.5rem;
-  }
-
-  ul.projects li,
-  ul.tennis li,
-  ul.experiences li {
-    background: var(--color-card-bg-light);
-    padding: 1.5rem 1.75rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px var(--color-shadow-light);
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease;
-  }
-
-  body.dark ul.projects li,
-  body.dark ul.tennis li,
-  body.dark ul.experiences li {
-    background: var(--color-card-bg-dark);
-    box-shadow: 0 10px 30px var(--color-shadow-dark);
-  }
-
-  ul.projects li:hover,
-  ul.tennis li:hover,
-  ul.experiences li:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.35);
-  }
-
-  .project-title,
-  .experience-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0 0 0.6rem 0;
-  }
-
-  .project-desc,
-  .experience-desc {
-    font-size: 1rem;
-    margin: 0;
-    color: #444;
-  }
-
-  body.dark .project-desc,
-  body.dark .experience-desc {
-    color: #bbb;
-  }
-
-  .toggle-btn {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    background: var(--color-accent);
-    border: none;
-    color: white;
-    padding: 0.55rem 1.25rem;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1rem;
-    box-shadow: 0 6px 12px rgb(79 70 229 / 0.5);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1000;
-    user-select: none;
-  }
-  .toggle-btn:hover,
-  .toggle-btn:focus {
-    background: #3730a3;
-    outline: none;
-    box-shadow: 0 8px 16px rgb(79 70 229 / 0.75);
-  }
-
-  /* Tennis list style simpler */
-  ul.tennis li {
-    background: none;
-    box-shadow: none;
-    padding: 0.25rem 0;
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--color-accent);
-  }
-
-  body.dark ul.tennis li {
-    color: var(--color-accent-light);
-  }
-
-  footer {
-    text-align: center;
-    padding: 1.2rem 1rem;
-    color: #888;
-    border-top: 1px solid #ccc;
-    font-size: 0.9rem;
-    transition: border-color var(--transition-speed), color var(--transition-speed);
-  }
-  footer.dark {
-    border-color: #444;
-    color: #aaa;
-  }
-
-  @media (max-width: 600px) {
     h1 {
-      font-size: 2.25rem;
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      user-select: none;
     }
+
     h2 {
-      font-size: 1.6rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2rem;
     }
-  }
-</style>
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.125rem;
+      color: #555;
+      user-select: none;
+    }
+
+    body.dark header p {
+      color: #bbb;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.7s forwards;
+      animation-delay: 0.2s;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Card Styles */
+    ul.projects,
+    ul.tennis,
+    ul.experiences {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem 1.5rem;
+    }
+
+    ul.projects li,
+    ul.experiences li {
+      background: var(--color-card-bg-light);
+      padding: 1.75rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 25px var(--color-shadow-light);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease;
+      will-change: transform;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    body.dark ul.projects li,
+    body.dark ul.experiences li {
+      background: var(--color-card-bg-dark);
+      box-shadow: 0 10px 30px var(--color-shadow-dark);
+    }
+
+    ul.projects li.visible,
+    ul.experiences li.visible {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.15s;
+    }
+
+    ul.projects li:hover,
+    ul.experiences li:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(79, 70, 229, 0.35);
+      cursor: pointer;
+    }
+
+    .project-title,
+    .experience-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 0.6rem 0;
+    }
+
+    .project-desc,
+    .experience-desc {
+      font-size: 1rem;
+      margin: 0;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    body.dark .project-desc,
+    body.dark .experience-desc {
+      color: #bbb;
+    }
+
+    /* Tennis achievements cards fix & style */
+    ul.tennis {
+      grid-template-columns: 1fr; /* single column for clarity */
+      gap: 0.8rem;
+      padding-left: 0;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    ul.tennis li {
+      background: var(--color-card-bg-light);
+      box-shadow: 0 8px 20px var(--color-shadow-light);
+      padding: 1rem 1.25rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      line-height: 1.5;
+      transition: box-shadow 0.3s ease, transform 0.25s ease;
+      user-select: none;
+    }
+
+    body.dark ul.tennis li {
+      background: var(--color-card-bg-dark);
+      color: var(--color-accent-light);
+      box-shadow: 0 8px 25px var(--color-shadow-dark);
+    }
+
+    ul.tennis li:hover {
+      box-shadow: 0 15px 45px rgba(79, 70, 229, 0.35);
+      transform: scale(1.02);
+      cursor: default;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.2rem 1rem;
+      color: #888;
+      border-top: 1px solid #ccc;
+      font-size: 0.9rem;
+      transition: border-color var(--transition-speed), color var(--transition-speed);
+      user-select: none;
+    }
+    footer.dark {
+      border-color: #444;
+      color: #aaa;
+    }
+
+    /* Toggle button updated with icon & tooltip */
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--color-accent);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.3rem;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 6px 12px rgb(79 70 229 / 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    .toggle-btn:hover,
+    .toggle-btn:focus {
+      background: #3730a3;
+      outline: none;
+      box-shadow: 0 8px 16px rgb(79 70 229 / 0.75);
+    }
+    .toggle-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      transition: transform 0.3s ease;
+    }
+    body.dark .toggle-btn svg {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      ul.projects,
+      ul.experiences {
+        grid-template-columns: 1fr;
+      }
+      ul.tennis {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-<button class="toggle-btn" aria-label="Toggle dark/light mode">Dark Mode</button>
+  <button class="toggle-btn" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
+      <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+    </svg>
+    Dark Mode
+  </button>
 
-<header>
-  <h1>Andrew Otzenberger</h1>
-  <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
-</header>
+  <header>
+    <h1>Andrew Otzenberger</h1>
+    <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
+  </header>
 
-<main>
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
-      As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
+        As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.<br/><br/>
 
-      My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
-      I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
-    </p>
-  </section>
+        My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
+        I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
+      </p>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul class="projects">
-      <li>
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" class="project-link">EMP Pulse and Circuit Response Simulator</a>
-        </p>
-        <p class="project-desc">
-          A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
-        </p>
-      </li>
-      <li>
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
-        </p>
-        <p class="project-desc">
-          Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
-        </p>
-      </li>
-      <li>
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
-        </p>
-        <p class="project-desc">
-          Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
-        </p>
-      </li>
-      <li>
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" class="project-link">CERN Particle Simulator</a>
-        </p>
-        <p class="project-desc">
-          A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
-        </p>
-      </li>
-      <li>
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" class="project-link">Cryptographic Random Coin Flip Demo</a>
-        </p>
-        <p class="project-desc">
-          A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
-        </p>
-      </li>
-    </ul>
-  </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul class="projects">
+        <li>
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">EMP Pulse and Circuit Response Simulator</a>
+          </p>
+          <p class="project-desc">
+            A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
+          </p>
+        </li>
+        <li>
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" class="project-link" rel="noopener noreferrer">Interactive Quantum Harmonic Oscillator Visualizer</a>
+          </p>
+          <p class="project-desc">
+            Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
+          </p>
+        </li>
+        <li>
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">Interactive 2D Electric Field Potential Simulator</a>
+          </p>
+          <p class="project-desc">
+            Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
+          </p>
+        </li>
+        <li>
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">CERN Particle Simulator</a>
+          </p>
+          <p class="project-desc">
+            A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
+          </p>
+        </li>
+        <li>
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" class="project-link" rel="noopener noreferrer">Cryptographic Random Coin Flip Demo</a>
+          </p>
+          <p class="project-desc">
+            A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
+          </p>
+        </li>
+      </ul>
+    </section>
 
-  <section id="experiences">
-    <h2>Experiences</h2>
-    <ul class="experiences">
-      <li>
-        <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
-        <p class="experience-desc">Developed MATLAB simulations visualizing electric field vectors and potentials, contributing to ongoing research in electromagnetism.</p>
-      </li>
-      <li>
-        <p class="experience-title">IT Support Intern - Tech Solutions Inc.</p>
-        <p class="experience-desc">Provided hardware and software support, managed IT tickets, and optimized workflows for small business clients.</p>
-      </li>
-      <li>
-        <p class="experience-title">Data Analytics Developer - Independent Projects</p>
-        <p class="experience-desc">Created Python-based data scraping and analytics tools to extract real-time insights from multiple web sources.</p>
-      </li>
-      <li>
-        <p class="experience-title">Tennis Team Captain - University Athletics</p>
-        <p class="experience-desc">Led team practices, managed training schedules, and represented the team in university sports leadership meetings.</p>
-      </li>
-      <li>
-        <p class="experience-title">Volunteer Coding Instructor - Local STEM Outreach</p>
-        <p class="experience-desc">Taught basic programming concepts to high school students to promote interest in computer science and engineering.</p>
-      </li>
-    </ul>
-  </section>
+    <section id="experiences">
+      <h2>Experiences</h2>
+      <ul class="experiences">
+        <li>
+          <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
+          <p class="experience-desc">Developed MATLAB simulations visualizing electric field vectors and potentials, contributing to ongoing research in electromagnetism.</p>
+        </li>
+        <li>
+          <p class="experience-title">IT Support Intern - Tech Solutions Inc.</p>
+          <p class="experience-desc">Provided hardware and software support, managed IT tickets, and optimized workflows for small business clients.</p>
+        </li>
+        <li>
+          <p class="experience-title">Data Analytics Developer - Independent Projects</p>
+          <p class="experience-desc">Created Python-based data scraping and analytics tools to extract real-time insights from multiple web sources.</p>
+        </li>
+        <li>
+          <p class="experience-title">Tennis Team Captain - University Athletics</p>
+          <p class="experience-desc">Led team practices, managed training schedules, and represented the team in university sports leadership meetings.</p>
+        </li>
+        <li>
+          <p class="experience-title">Volunteer Coding Instructor - Local STEM Outreach</p>
+          <p class="experience-desc">Taught basic programming concepts to high school students to promote interest in computer science and engineering.</p>
+        </li>
+      </ul>
+    </section>
 
-  <section id="tennis">
-    <h2>Tennis Achievements</h2>
-    <ul class="tennis">
-      <li>NAIA Men’s Singles Nationally Ranked #24</li>
-      <li>Former NCAA Division I Men's Tennis Athlete</li>
-      <li>Competitive mindset and discipline from elite college-level sports</li>
-    </ul>
-  </section>
-</main>
+    <section id="tennis">
+      <h2>Tennis Achievements</h2>
+      <ul class="tennis">
+        <li>NAIA Men’s Singles Nationally Ranked #24</li>
+        <li>Former NCAA Division I Men's Tennis Athlete</li>
+        <li>Competitive mindset and discipline from elite college-level sports</li>
+      </ul>
+    </section>
+  </main>
 
-<footer>
-  <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank">LinkedIn</a></p>
-</footer>
+  <footer>
+    <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </footer>
 
-<script>
-  const toggleBtn = document.querySelector('.toggle-btn');
-  const body = document.body;
+  <script>
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const body = document.body;
 
-  // Initialize theme based on user system preference
-  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    body.classList.add('dark');
-    toggleBtn.textContent = 'Light Mode';
-  }
+    // Icon inside button
+    const icon = toggleBtn.querySelector('svg');
+    
+    // Initialize theme based on user system preference
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      body.classList.add('dark');
+      toggleBtn.textContent = 'Light Mode';
+      toggleBtn.prepend(icon);
+    }
 
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    toggleBtn.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
-  });
-</script>
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')) {
+        toggleBtn.textContent = 'Light Mode';
+      } else {
+        toggleBtn.textContent = 'Dark Mode';
+      }
+      toggleBtn.prepend(icon);
+    });
+
+    // Sticky header shadow on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Fade in cards on scroll
+    const observerOptions = {
+      threshold: 0.15
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('ul.projects li, ul.experiences li').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
