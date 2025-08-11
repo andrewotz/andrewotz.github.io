@@ -1,52 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Andrew Otzenberger | Portfolio</title>
+<style>
+  :root {
+    --color-bg-light: #f9f9f9;
+    --color-bg-dark: #121212;
+    --color-text-light: #222;
+    --color-text-dark: #eee;
+    --color-accent: #4f46e5;
+    --transition-speed: 0.3s;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-light);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  body.dark {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+  }
+  header {
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+  header.dark {
+    border-color: #444;
+  }
+  h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  h2 {
+    margin-top: 0;
+    color: var(--color-accent);
+  }
+  .toggle-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s;
+    z-index: 1000;
+  }
+  .toggle-btn:hover {
+    background: #3730a3;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  ul.projects, ul.tennis {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul.projects li, ul.tennis li {
+    margin-bottom: 1rem;
+    background: #e0e7ff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(79 70 229 / 0.2);
+    transition: background 0.3s;
+  }
+  body.dark ul.projects li, body.dark ul.tennis li {
+    background: #1e1e2f;
+    box-shadow: 0 2px 8px rgb(79 70 229 / 0.6);
+  }
+  a.project-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a.project-link:hover {
+    text-decoration: underline;
+  }
+  .project-title {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .project-desc {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: #888;
+    border-top: 1px solid #ccc;
+  }
+  footer.dark {
+    border-color: #444;
+    color: #aaa;
+  }
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <p>Computer Science Student | Developer | Problem Solver</p>
-    </header>
+<button class="toggle-btn" aria-label="Toggle dark/light mode">Dark Mode</button>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<header>
+  <h1>Andrew Otzenberger</h1>
+  <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
+</header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I’m a Computer Science student passionate about building software, solving problems, and exploring AI. I enjoy working on coding projects and learning new technologies.</p>
-    </section>
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a passionate Computer Science student specializing in software engineering, physics, and quantum computing. 
+      As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
+    </p>
+  </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Particle Collision Simulation</h3>
-            <p>A real-time physics simulation inspired by CERN data, with adjustable sliders to visualize particle collisions.</p>
-            <a href="https://github.com/your-username/project-repo" target="_blank">View on GitHub</a>
-        </div>
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li>
+        <p class="project-title">
+          <a href="https://github.com/yourusername/emp-pulse-simulation" target="_blank" class="project-link">EMP Pulse and Circuit Response Simulator</a>
+        </p>
+        <p class="project-desc">
+          A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
+        </p>
+      </li>
+      <li>
+        <p class="project-title">
+          <a href="https://github.com/yourusername/quantum-harmonic-oscillator" target="_blank" class="project-link">Quantum Harmonic Oscillator Visualizer</a>
+        </p>
+        <p class="project-desc">
+          Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
+        </p>
+      </li>
+      <li>
+        <p class="project-title">
+          <a href="https://github.com/yourusername/monte-carlo-particle-collision" target="_blank" class="project-link">Monte Carlo Particle Collision Simulator</a>
+        </p>
+        <p class="project-desc">
+          A stochastic particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
+        </p>
+      </li>
+      <li>
+        <p class="project-title">
+          <a href="https://github.com/yourusername/cryptography-coin-flip" target="_blank" class="project-link">Cryptographic Random Coin Flip Demo</a>
+        </p>
+        <p class="project-desc">
+          A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
+        </p>
+      </li>
+    </ul>
+  </section>
 
-        <div class="project">
-            <h3>Quantum Coin Flip (QRNG vs PRNG)</h3>
-            <p>A cryptography demonstration comparing pseudo-random and quantum-random number generation.</p>
-            <a href="https://github.com/your-username/project-repo" target="_blank">View on GitHub</a>
-        </div>
-    </section>
+  <section id="tennis">
+    <h2>Tennis Achievements</h2>
+    <ul class="tennis">
+      <li>NAIA Men’s Singles Nationally Ranked #24</li>
+      <li>Former NCAA Division I Men's Tennis Athlete</li>
+      <li>Competitive mindset and discipline from elite college-level sports</li>
+    </ul>
+  </section>
+</main>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: your.email@example.com</p>
-        <p>GitHub: <a href="https://github.com/your-username" target="_blank">github.com/your-username</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/your-linkedin" target="_blank">linkedin.com/in/your-linkedin</a></p>
-    </section>
+<footer>
+  <p>© 2025 Andrew Otzenberger | <a href="https://github.com/yourusername" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/andrewotzenberger" target="_blank">LinkedIn</a></p>
+</footer>
 
-    <footer>
-        <p>© 2025 Andrew Otzenberger. Built with ❤️ using GitHub Pages.</p>
-    </footer>
+<script>
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const body = document.body;
+
+  // Initialize based on user preference or default to light
+  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    body.classList.add('dark');
+    toggleBtn.textContent = 'Light Mode';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    if(body.classList.contains('dark')) {
+      toggleBtn.textContent = 'Light Mode';
+    } else {
+      toggleBtn.textContent = 'Dark Mode';
+    }
+  });
+</script>
+
 </body>
 </html>
