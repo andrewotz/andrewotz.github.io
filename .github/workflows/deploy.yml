@@ -19,7 +19,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Important to fetch full history for gh-pages deploy
+          fetch-depth: 0
+
+      - name: Configure Git user
+        run: |
+          git config --global user.name "andrewotz"
+          git config --global user.email "your-email@example.com"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
@@ -38,5 +43,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           user_name: "andrewotz"
-          user_email: "andrew.otz7@gmail.com"  # Replace with your email
+          user_email: "andrew.otz7@gmail.com"
+          force_orphan: true
           keep_files: false
