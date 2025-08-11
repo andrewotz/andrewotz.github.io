@@ -1,645 +1,577 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Andrew Otzenberger | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andrew Otzenberger | Portfolio</title>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R0SSHMLP09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0SSHMLP09"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R0SSHMLP09');
+  </script>
 
-<meta name="description" content="Andrew Otzenberger - Computer Science student, nationally ranked tennis player, and aspiring software engineer. Portfolio showcasing projects, experience, and achievements." />
-<meta property="og:title" content="Andrew Otzenberger | Portfolio" />
-<meta property="og:description" content="Explore Andrew's projects in scientific computing, web scraping, and physics visualization, plus elite tennis achievements." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yourcustomdomain.com" />
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/145824036?s=400&u=a478a9deee94acd8d88382f40d9179a62436e77c&v=4" />
-
-<style>
-  :root {
-    --color-bg-light: #f9f9f9;
-    --color-bg-dark: #121212;
-    --color-bg-dark-header: #0d0d0d;
-    --color-text-light: #222;
-    --color-text-dark: #eee;
-    --color-text-dark-header: #fafafa;
-    --color-accent: #5c52b2; /* softer purple */
-    --transition-speed: 0.3s;
-    --card-bg-light: #e0e7ff;
-    --card-bg-dark: #1e1e2f;
-    --card-shadow-light: rgba(92, 82, 178, 0.3);
-    --card-shadow-dark: rgba(92, 82, 178, 0.6);
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-bg-light);
-    color: var(--color-text-light);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-  }
-
-  body.dark {
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-dark);
-  }
-
-  header {
-    padding: 2rem 1rem 1rem;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    background-color: transparent;
-    transition: background-color var(--transition-speed), border-color var(--transition-speed);
-  }
-
-  body.dark header {
-    background-color: var(--color-bg-dark-header);
-    border-color: #444;
-    color: var(--color-text-dark-header);
-  }
-
-  header.scrolled {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
-
-  body.dark h1 {
-    color: var(--color-text-dark-header);
-  }
-
-  p {
-    max-width: 600px;
-    margin: 0.5rem auto 0;
-    line-height: 1.5;
-  }
-
-  body.dark p {
-    color: var(--color-text-dark-header);
-  }
-
-  h2 {
-    margin-top: 0;
-    color: var(--color-accent);
-  }
-
-  .toggle-btn {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    background: var(--color-accent);
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: background 0.3s;
-    z-index: 1000;
-  }
-
-  .toggle-btn:hover {
-    background: #473b91;
-  }
-
-  main {
-    max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  ul.projects, ul.tennis, ul.experiences {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.5rem;
-  }
-
-  ul.projects li, ul.tennis li, ul.experiences li {
-    background: var(--card-bg-light);
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px var(--card-shadow-light);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: default;
-  }
-
-  ul.projects li:hover, ul.tennis li:hover, ul.experiences li:hover,
-  ul.projects li:focus-within, ul.tennis li:focus-within, ul.experiences li:focus-within {
-    box-shadow: 0 8px 20px var(--card-shadow-light);
-    transform: scale(1.03);
-    outline: none;
-  }
-
-  body.dark ul.projects li, body.dark ul.tennis li, body.dark ul.experiences li {
-    background: var(--card-bg-dark);
-    box-shadow: 0 2px 8px var(--card-shadow-dark);
-    color: var(--color-text-dark);
-  }
-
-  body.dark ul.projects li:hover, body.dark ul.tennis li:hover, body.dark ul.experiences li:hover,
-  body.dark ul.projects li:focus-within, body.dark ul.tennis li:focus-within, body.dark ul.experiences li:focus-within {
-    box-shadow: 0 8px 20px var(--card-shadow-dark);
-  }
-
-  a.project-link {
-    color: var(--color-accent);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a.project-link:hover,
-  a.project-link:focus {
-    text-decoration: underline;
-    outline: none;
-  }
-
-  .project-title, .experience-title {
-    font-size: 1.2rem;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .project-desc, .experience-desc {
-    margin: 0.25rem 0 0;
-    font-size: 0.95rem;
-    line-height: 1.3;
-  }
-
-  ul.tennis li {
-    position: relative;
-  }
-
-  ul.tennis li > button.close-details {
-    position: absolute;
-    top: 0.2rem;
-    right: 0.2rem;
-    background: transparent;
-    border: none;
-    color: var(--color-accent);
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  ul.tennis li .details {
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-    color: #666;
-    display: none;
-  }
-
-  ul.tennis li.show-details .details {
-    display: block;
-  }
-
-  ul.tennis li.show-details > button.close-details {
-    display: inline;
-  }
-
-  body.dark ul.tennis li .details {
-    color: #bbb;
-  }
-
-  #contact label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: 600;
-  }
-
-  #contact input,
-  #contact textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.3rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-
-  #contact input:focus,
-  #contact textarea:focus {
-    border-color: var(--color-accent);
-    outline: none;
-  }
-
-  #contact button[type="submit"] {
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: white;
-    background-color: var(--color-accent);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  #contact button[type="submit"]:hover,
-  #contact button[type="submit"]:focus {
-    background-color: #473b91;
-    outline: none;
-  }
-
-  .error-message {
-    color: #d93025;
-    font-size: 0.85rem;
-    margin-top: 0.2rem;
-    display: block;
-    min-height: 1.2em;
-  }
-
-  .success-message {
-    margin-top: 1rem;
-    color: #188038;
-    font-weight: 600;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1rem 0;
-    color: #888;
-    border-top: 1px solid #ccc;
-  }
-
-  body.dark footer {
-    border-color: #444;
-    color: #aaa;
-  }
-
-  /* Modal for screenshots */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right:0;
-    bottom: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 2000;
-  }
-
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-content {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-  }
-
-  .modal-content img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.8);
-  }
-
-  .modal-close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: var(--color-accent);
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    line-height: 34px;
-  }
-
-  .modal-close-btn:hover,
-  .modal-close-btn:focus {
-    background: #473b91;
-    outline: none;
-  }
-
-  /* Portrait style */
-  .portrait {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 1rem auto;
-    box-shadow: none; /* Removed purple glow */
-  }
-
-  /* Project screenshots */
-  .project-screenshot {
-    margin-top: 0.75rem;
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .project-screenshot:hover,
-  .project-screenshot:focus {
-    transform: scale(1.04);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    outline: none;
-  }
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem;
+  <style>
+    /* Google Fonts - Use system-ui fallback */
+    body, button, input, textarea {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     }
-  }
-</style>
+    :root {
+      --color-bg-light: #f8f9fa;
+      --color-bg-dark: #121212;
+      --color-bg-dark-header: #0d0d0d;
+      --color-text-light: #212529;
+      --color-text-dark: #e1e1e1;
+      --color-text-dark-header: #f8f9fa;
+      --color-accent: #5c52b2;
+      --transition-speed: 0.3s;
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1c1c28;
+      --card-shadow-light: rgba(92, 82, 178, 0.12);
+      --card-shadow-dark: rgba(92, 82, 178, 0.35);
+      --border-radius: 12px;
+      --max-width: 920px;
+      --spacing: 1.5rem;
+    }
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-light);
+      line-height: 1.6;
+      font-size: 1rem;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--spacing);
+    }
+    body.dark {
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-dark);
+    }
+    header {
+      width: 100%;
+      max-width: var(--max-width);
+      text-align: center;
+      margin-bottom: var(--spacing);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #ddd;
+      transition: background-color var(--transition-speed), border-color var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    body.dark header {
+      border-color: #444;
+      background-color: var(--color-bg-dark-header);
+      color: var(--color-text-dark-header);
+    }
+    header h1 {
+      margin: 0 0 0.4rem;
+      font-weight: 700;
+      font-size: 2.75rem;
+      letter-spacing: -0.02em;
+      color: inherit;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: inherit;
+      opacity: 0.8;
+    }
+
+    /* Profile photo */
+    .portrait {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      border: none; /* no purple outline */
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--color-accent);
+      border: none;
+      color: white;
+      padding: 0.55rem 1.25rem;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(92, 82, 178, 0.3);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+    }
+    .toggle-btn:hover,
+    .toggle-btn:focus {
+      background-color: #473b91;
+      outline: none;
+    }
+
+    main {
+      width: 100%;
+      max-width: var(--max-width);
+      flex-grow: 1;
+    }
+
+    section {
+      margin-bottom: 3.25rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      border-left: 5px solid var(--color-accent);
+      padding-left: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Lists of cards */
+    ul.projects,
+    ul.experiences,
+    ul.tennis {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem 2rem;
+    }
+
+    /* Card style */
+    ul.projects li,
+    ul.experiences li,
+    ul.tennis li {
+      background-color: var(--card-bg-light);
+      border-radius: var(--border-radius);
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 4px 10px var(--card-shadow-light);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+      color: var(--color-text-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 160px;
+    }
+    ul.projects li:hover,
+    ul.experiences li:hover,
+    ul.tennis li:hover,
+    ul.projects li:focus-within,
+    ul.experiences li:focus-within,
+    ul.tennis li:focus-within {
+      box-shadow: 0 12px 26px var(--card-shadow-light);
+      transform: scale(1.03);
+      outline: none;
+      cursor: pointer;
+    }
+    body.dark ul.projects li,
+    body.dark ul.experiences li,
+    body.dark ul.tennis li {
+      background-color: var(--card-bg-dark);
+      box-shadow: 0 4px 10px var(--card-shadow-dark);
+      color: var(--color-text-dark);
+    }
+    body.dark ul.projects li:hover,
+    body.dark ul.experiences li:hover,
+    body.dark ul.tennis li:hover,
+    body.dark ul.projects li:focus-within,
+    body.dark ul.experiences li:focus-within,
+    body.dark ul.tennis li:focus-within {
+      box-shadow: 0 12px 26px var(--card-shadow-dark);
+    }
+
+    .project-title,
+    .experience-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.15;
+      color: inherit;
+    }
+    .project-desc,
+    .experience-desc {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: inherit;
+      opacity: 0.85;
+      flex-grow: 1;
+    }
+
+    a.project-link {
+      color: var(--color-accent);
+      font-weight: 600;
+      text-decoration: none;
+      user-select: text;
+    }
+    a.project-link:hover,
+    a.project-link:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    ul.tennis li {
+      min-height: auto;
+      cursor: default;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      border-left: 4px solid var(--color-accent);
+      background: transparent;
+      box-shadow: none;
+      transition: none;
+      display: block;
+    }
+    body.dark ul.tennis li {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    ul.tennis {
+      max-width: 480px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Contact form */
+    #contact label {
+      display: block;
+      margin-top: 1.3rem;
+      font-weight: 600;
+      color: inherit;
+    }
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      margin-top: 0.35rem;
+      border: 1.7px solid #bbb;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: transparent;
+      color: inherit;
+      transition: border-color 0.3s;
+      font-family: inherit;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      border-color: var(--color-accent);
+      outline: none;
+    }
+    #contact button[type="submit"] {
+      margin-top: 1.75rem;
+      padding: 0.85rem 1.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      background-color: var(--color-accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(92, 82, 178, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    #contact button[type="submit"]:hover,
+    #contact button[type="submit"]:focus {
+      background-color: #473b91;
+      outline: none;
+    }
+    .error-message {
+      color: #d93025;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+      min-height: 1.3em;
+      display: block;
+    }
+    .success-message {
+      margin-top: 1rem;
+      color: #188038;
+      font-weight: 600;
+    }
+
+    /* Resume download button style */
+    .resume-btn {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--color-accent);
+      border: 2.5px solid var(--color-accent);
+      padding: 0.55rem 1.2rem;
+      border-radius: 7px;
+      transition: background-color 0.3s, color 0.3s;
+      text-decoration: none;
+      user-select: none;
+      margin: 1rem auto 2rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: block;
+      max-width: 200px;
+      text-align: center;
+    }
+    .resume-btn:hover,
+    .resume-btn:focus {
+      background-color: var(--color-accent);
+      color: white;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      ul.projects,
+      ul.experiences {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 0 var(--spacing);
+      }
+      header h1 {
+        font-size: 2.25rem;
+      }
+      section h2 {
+        font-size: 1.75rem;
+      }
+      /* Make header photo smaller on small screens */
+      .portrait {
+        width: 90px;
+        height: 90px;
+      }
+    }
+  </style>
 </head>
 <body>
-<button class="toggle-btn" aria-label="Toggle dark/light mode">Dark Mode</button>
+  <button class="toggle-btn" aria-label="Toggle dark/light mode">Dark Mode</button>
 
-<header>
-  <h1>Andrew Otzenberger</h1>
-  <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
-  <img
-    src="https://avatars.githubusercontent.com/u/12345678?v=4"
-    alt="Portrait of Andrew Otzenberger"
-    class="portrait"
-    loading="lazy"
-  />
-  <a href="/Andrew_Otzenberger_Resume.pdf" download class="resume-btn" style="display:block; margin:0.5rem auto; text-align:center; font-weight:600; color: var(--color-accent); text-decoration:none; cursor:pointer;">Download Resume</a>
-</header>
+  <header>
+    <img
+      src="https://avatars.githubusercontent.com/u/145824036?s=400&u=a478a9deee94acd8d88382f40d9179a62436e77c&v=4"
+      alt="Portrait of Andrew Otzenberger"
+      class="portrait"
+      loading="lazy"
+      />
+    <h1>Andrew Otzenberger</h1>
+    <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
+    <a href="/Andrew_Otzenberger_Resume.pdf" download class="resume-btn">Download Resume</a>
+  </header>
 
-<main>
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
-      As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
-      My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
-      I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
-    </p>
-  </section>
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
+        As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
+        My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
+        I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
+      </p>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul class="projects" role="list" aria-label="Projects">
-      <li tabindex="0" aria-describedby="proj-desc-1">
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">EMP Pulse and Circuit Response Simulator</a>
-        </p>
-        <p id="proj-desc-1" class="project-desc">
-          A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
-        </p>
-        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=EMP+Pulse+Simulator" alt="Screenshot of EMP Pulse Simulator" tabindex="0" />
-      </li>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul class="projects" role="list" aria-label="Projects">
+        <li tabindex="0" aria-describedby="proj-desc-1">
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">EMP Pulse and Circuit Response Simulator</a>
+          </p>
+          <p id="proj-desc-1" class="project-desc">
+            A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
+          </p>
+        </li>
 
-      <li tabindex="0" aria-describedby="proj-desc-2">
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" rel="noopener noreferrer" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
-        </p>
-        <p id="proj-desc-2" class="project-desc">
-          Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
-        </p>
-        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=Quantum+Harmonic+Oscillator" alt="Screenshot of Quantum Harmonic Oscillator Visualizer" tabindex="0" />
-      </li>
+        <li tabindex="0" aria-describedby="proj-desc-2">
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" rel="noopener noreferrer" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
+          </p>
+          <p id="proj-desc-2" class="project-desc">
+            Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
+          </p>
+        </li>
 
-      <li tabindex="0" aria-describedby="proj-desc-3">
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
-        </p>
-        <p id="proj-desc-3" class="project-desc">
-          Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
-        </p>
-      </li>
+        <li tabindex="0" aria-describedby="proj-desc-3">
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
+          </p>
+          <p id="proj-desc-3" class="project-desc">
+            Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
+          </p>
+        </li>
 
-      <li tabindex="0" aria-describedby="proj-desc-4">
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">CERN Particle Simulator</a>
-        </p>
-        <p id="proj-desc-4" class="project-desc">
-          A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
-        </p>
-      </li>
+        <li tabindex="0" aria-describedby="proj-desc-4">
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">CERN Particle Simulator</a>
+          </p>
+          <p id="proj-desc-4" class="project-desc">
+            A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
+          </p>
+        </li>
 
-      <li tabindex="0" aria-describedby="proj-desc-5">
-        <p class="project-title">
-          <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" rel="noopener noreferrer" class="project-link">Cryptographic Random Coin Flip Demo</a>
-        </p>
-        <p id="proj-desc-5" class="project-desc">
-          A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
-        </p>
-      </li>
-    </ul>
-  </section>
+        <li tabindex="0" aria-describedby="proj-desc-5">
+          <p class="project-title">
+            <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" rel="noopener noreferrer" class="project-link">Cryptographic Random Coin Flip Demo</a>
+          </p>
+          <p id="proj-desc-5" class="project-desc">
+            A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
+          </p>
+        </li>
+      </ul>
+    </section>
 
-  <section id="experiences">
-    <h2>Experiences</h2>
-    <ul class="experiences" role="list" aria-label="Experiences">
-      <li tabindex="0" aria-describedby="exp-desc-1">
-        <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
-        <p id="exp-desc-1" class="experience-desc">
-          Developed MATLAB visualizations for electric field vectors and potentials, applying numerical methods to simulate electrostatics for academic research.
-        </p>
-      </li>
-      <li tabindex="0" aria-describedby="exp-desc-2">
-        <p class="experience-title">IT Intern - Louisiana State University</p>
-        <p id="exp-desc-2" class="experience-desc">
-          Supported campus network infrastructure, automated data extraction with Python scripts, and assisted in troubleshooting user hardware/software issues.
-        </p>
-      </li>
-      <li tabindex="0" aria-describedby="exp-desc-3">
-        <p class="experience-title">Tennis Team Captain - NAIA College</p>
-        <p id="exp-desc-3" class="experience-desc">
-          Led team practices, managed logistics, and fostered teamwork while competing nationally as a Top-25 ranked player.
-        </p>
-      </li>
-      <li tabindex="0" aria-describedby="exp-desc-4">
-        <p class="experience-title">Web Scraping & Data Analyst - Independent Projects</p>
-        <p id="exp-desc-4" class="experience-desc">
-          Created automated Python tools to collect and analyze real-time data, delivering actionable insights for research and personal projects.
-        </p>
-      </li>
-      <li tabindex="0" aria-describedby="exp-desc-5">
-        <p class="experience-title">Technical Volunteer - Local Science Outreach</p>
-        <p id="exp-desc-5" class="experience-desc">
-          Assisted in coding workshops and science fairs, helping students understand computational physics and programming concepts.
-        </p>
-      </li>
-    </ul>
-  </section>
+    <section id="experiences">
+      <h2>Experience</h2>
+      <ul class="experiences" role="list" aria-label="Experience">
+        <li tabindex="0" aria-describedby="exp-desc-1">
+          <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept</p>
+          <p id="exp-desc-1" class="experience-desc">
+            Developed MATLAB simulations and visualizations of electric field vectors and potentials for physics research projects.
+          </p>
+        </li>
+        <li tabindex="0" aria-describedby="exp-desc-2">
+          <p class="experience-title">IT Intern - LSU IT Services</p>
+          <p id="exp-desc-2" class="experience-desc">
+            Supported network infrastructure and automated data collection tools, improving operational efficiency.
+          </p>
+        </li>
+        <li tabindex="0" aria-describedby="exp-desc-3">
+          <p class="experience-title">Data Analytics Developer - Independent Projects</p>
+          <p id="exp-desc-3" class="experience-desc">
+            Built Python tools to scrape and analyze data from real-time sources for research and personal projects.
+          </p>
+        </li>
+        <li tabindex="0" aria-describedby="exp-desc-4">
+          <p class="experience-title">Volunteer Tutor - Computer Science & Physics</p>
+          <p id="exp-desc-4" class="experience-desc">
+            Assisted students with coding, algorithm design, and physics concepts in tutoring sessions.
+          </p>
+        </li>
+        <li tabindex="0" aria-describedby="exp-desc-5">
+          <p class="experience-title">Technical Volunteer - Local Science Outreach</p>
+          <p id="exp-desc-5" class="experience-desc">
+            Helped organize workshops and demonstrations, teaching basic computational physics and programming.
+          </p>
+        </li>
+      </ul>
+    </section>
 
-  <section id="tennis">
-    <h2>Tennis Achievements</h2>
-    <ul class="tennis" role="list" aria-label="Tennis Achievements">
-      <li tabindex="0">NAIA Men’s Singles Nationally Ranked #24</li>
-      <li tabindex="0">Former NCAA Division I Men's Tennis Athlete</li>
-      <li tabindex="0">Competitive mindset and discipline from elite college-level sports</li>
-    </ul>
-  </section>
+    <section id="tennis">
+      <h2>Tennis Achievements</h2>
+      <ul class="tennis" role="list" aria-label="Tennis Achievements">
+        <li tabindex="0">NAIA Men’s Singles Nationally Ranked #24</li>
+        <li tabindex="0">Former NCAA Division I Men's Tennis Athlete</li>
+        <li tabindex="0">Competitive mindset and discipline from elite college-level sports</li>
+      </ul>
+    </section>
 
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form id="contact-form" novalidate>
-      <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" />
-      <span id="name-error" class="error-message" aria-live="polite"></span>
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form id="contact-form" novalidate>
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" />
+        <span id="name-error" class="error-message" aria-live="polite"></span>
 
-      <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" />
-      <span id="email-error" class="error-message" aria-live="polite"></span>
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" />
+        <span id="email-error" class="error-message" aria-live="polite"></span>
 
-      <label for="message">Message *</label>
-      <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
-      <span id="message-error" class="error-message" aria-live="polite"></span>
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
+        <span id="message-error" class="error-message" aria-live="polite"></span>
 
-      <button type="submit">Send Message</button>
-      <div id="form-success" class="success-message" role="alert" aria-live="assertive" style="display:none;">Thank you! Your message has been sent.</div>
-    </form>
-  </section>
-</main>
+        <button type="submit">Send Message</button>
+        <div id="form-success" class="success-message" role="alert" aria-live="assertive" style="display:none;">
+          Thank you! Your message has been sent.
+        </div>
+      </form>
+    </section>
+  </main>
 
-<footer>
-  <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
-</footer>
+  <footer>
+    <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </footer>
 
-<!-- Modal for screenshot preview -->
-<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-  <div class="modal-content">
-    <button class="modal-close-btn" aria-label="Close image preview">&times;</button>
-    <img src="" alt="" id="modal-img" />
-  </div>
-</div>
+  <script>
+    // Dark mode toggle
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const body = document.body;
 
-<script>
-  const toggleBtn = document.querySelector('.toggle-btn');
-  const body = document.body;
-
-  // Initialize based on user preference or default to light
-  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    body.classList.add('dark');
-    toggleBtn.textContent = 'Light Mode';
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    if(body.classList.contains('dark')) {
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      body.classList.add('dark');
       toggleBtn.textContent = 'Light Mode';
-    } else {
-      toggleBtn.textContent = 'Dark Mode';
     }
-  });
 
-  // Modal image preview logic
-  const modal = document.getElementById('modal');
-  const modalImg = document.getElementById('modal-img');
-  const modalCloseBtn = modal.querySelector('.modal-close-btn');
-
-  document.querySelectorAll('.project-screenshot').forEach(img => {
-    img.addEventListener('click', () => {
-      modalImg.src = img.src;
-      modalImg.alt = img.alt;
-      modal.classList.add('active');
-      modal.focus();
-    });
-    img.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        img.click();
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')) {
+        toggleBtn.textContent = 'Light Mode';
+      } else {
+        toggleBtn.textContent = 'Dark Mode';
       }
     });
-  });
 
-  modalCloseBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-    modalImg.src = '';
-    modalImg.alt = '';
-  });
+    // Contact form validation
+    const form = document.getElementById('contact-form');
+    const nameInput = form.name;
+    const emailInput = form.email;
+    const messageInput = form.message;
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+    const formSuccess = document.getElementById('form-success');
 
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal) {
-      modalCloseBtn.click();
-    }
-  });
-
-  modal.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') {
-      modalCloseBtn.click();
-    }
-  });
-
-  // Contact form validation and simple submission (dummy example)
-  const form = document.getElementById('contact-form');
-  const nameInput = form.name;
-  const emailInput = form.email;
-  const messageInput = form.message;
-  const nameError = document.getElementById('name-error');
-  const emailError = document.getElementById('email-error');
-  const messageError = document.getElementById('message-error');
-  const formSuccess = document.getElementById('form-success');
-
-  function validateEmail(email) {
-    // Basic email pattern
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let valid = true;
-
-    if(nameInput.value.trim() === '') {
-      nameError.textContent = 'Please enter your name.';
-      valid = false;
-    } else {
-      nameError.textContent = '';
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    if(emailInput.value.trim() === '') {
-      emailError.textContent = 'Please enter your email.';
-      valid = false;
-    } else if(!validateEmail(emailInput.value.trim())) {
-      emailError.textContent = 'Please enter a valid email.';
-      valid = false;
-    } else {
-      emailError.textContent = '';
-    }
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
 
-    if(messageInput.value.trim() === '') {
-      messageError.textContent = 'Please enter your message.';
-      valid = false;
-    } else {
-      messageError.textContent = '';
-    }
+      if(nameInput.value.trim() === '') {
+        nameError.textContent = 'Please enter your name.';
+        valid = false;
+      } else {
+        nameError.textContent = '';
+      }
 
-    if(valid) {
-      // For demo: reset and show success message
-      form.reset();
-      formSuccess.style.display = 'block';
-      setTimeout(() => {
-        formSuccess.style.display = 'none';
-      }, 6000);
-    }
-  });
-</script>
+      if(emailInput.value.trim() === '') {
+        emailError.textContent = 'Please enter your email.';
+        valid = false;
+      } else if(!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email.';
+        valid = false;
+      } else {
+        emailError.textContent = '';
+      }
 
+      if(messageInput.value.trim() === '') {
+        messageError.textContent = 'Please enter your message.';
+        valid = false;
+      } else {
+        messageError.textContent = '';
+      }
+
+      if(valid) {
+        form.reset();
+        formSuccess.style.display = 'block';
+        setTimeout(() => {
+          formSuccess.style.display = 'none';
+        }, 6000);
+      }
+    });
+  </script>
 </body>
 </html>
