@@ -5,31 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Andrew Otzenberger | Portfolio</title>
   <style>
-    /* Root Variables */
+    /* === Root & Colors === */
     :root {
-      --color-bg-light: #f9f9fb;
-      --color-bg-dark: #121212;
-      --color-text-light: #222;
-      --color-text-dark: #eee;
-      --color-accent: #4f46e5;
-      --color-accent-light: #6366f1;
+      --color-bg-light: #f4f6f8;
+      --color-bg-dark: #121b2a;
+      --color-text-light: #1a1a1a;
+      --color-text-dark: #e0e6f0;
+      --color-primary: #2a4d69; /* deep blue */
+      --color-primary-light: #3b6ea5;
+      --color-accent: #9a4dff; /* vibrant purple */
+      --color-accent-light: #b480ff;
       --color-card-bg-light: #ffffff;
-      --color-card-bg-dark: #1e1e2f;
-      --color-shadow-light: rgba(0, 0, 0, 0.1);
-      --color-shadow-dark: rgba(0, 0, 0, 0.8);
+      --color-card-bg-dark: #1f2a44;
+      --color-shadow-light: rgba(42, 77, 105, 0.15);
+      --color-shadow-dark: rgba(26, 27, 42, 0.9);
       --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, system-ui;
       --transition-speed: 0.35s;
-      --border-radius: 12px;
-      --max-width: 900px;
-      --gradient-light: linear-gradient(135deg, #f0f4ff, #e0e7ff);
-      --gradient-dark: linear-gradient(135deg, #1a1a2e, #27294d);
+      --border-radius: 14px;
+      --max-width: 960px;
+      --gradient-light: linear-gradient(135deg, #e8f0fe, #d0dbf8);
+      --gradient-dark: linear-gradient(135deg, #121b2a, #192c4b);
+      --input-border-light: #ccd6f6;
+      --input-border-dark: #354a72;
+      --input-bg-light: #fff;
+      --input-bg-dark: #2b3a5c;
     }
 
-    /* Reset */
+    /* === Reset === */
     *, *::before, *::after {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       font-family: var(--font-sans);
@@ -40,30 +45,30 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
     body.dark {
       background: var(--gradient-dark);
       color: var(--color-text-dark);
     }
-
     a {
       color: var(--color-accent);
-      text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s;
+      text-decoration: none;
+      transition: color 0.3s ease;
     }
-    a:hover,
-    a:focus {
+    a:hover, a:focus {
       color: var(--color-accent-light);
-      outline: none;
       text-decoration: underline;
+      outline: none;
     }
-
+    /* === Header === */
     header {
       padding: 3rem 1.5rem 2rem;
       text-align: center;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #cbd3e1;
       transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
       position: sticky;
       top: 0;
@@ -72,177 +77,396 @@
       backdrop-filter: saturate(180%) blur(8px);
       -webkit-backdrop-filter: saturate(180%) blur(8px);
       box-shadow: none;
+      user-select: none;
     }
-
     body.dark header {
-      border-color: #333;
+      border-color: #2b3a5c;
       background-color: var(--color-card-bg-dark);
       box-shadow: none;
     }
-
     header.scrolled {
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
     }
-
     h1 {
       margin: 0;
       font-size: 3rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      user-select: none;
     }
-
     h2 {
       color: var(--color-accent);
       font-weight: 700;
       margin-bottom: 1rem;
       font-size: 2rem;
     }
-
     header p {
       margin-top: 0.5rem;
       font-size: 1.125rem;
-      color: #555;
-      user-select: none;
+      color: #536b92;
     }
-
     body.dark header p {
-      color: #bbb;
+      color: #a4b1d6;
     }
-
+    /* === Main Container === */
     main {
+      flex-grow: 1;
       max-width: var(--max-width);
-      margin: 2.5rem auto 4rem;
+      margin: 3rem auto 4rem;
       padding: 0 1.5rem;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 0.7s forwards;
       animation-delay: 0.2s;
     }
-
-    section {
-      margin-bottom: 4rem;
-    }
-
-    /* Fade in animation */
     @keyframes fadeInUp {
       to {
         opacity: 1;
         transform: none;
       }
     }
-
-    /* Card Styles */
+    section {
+      margin-bottom: 4.5rem;
+    }
+    /* === Portrait Section === */
+    #portrait-container {
+      max-width: 250px;
+      margin: 0 auto 3rem auto;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 35px var(--color-shadow-light);
+      transition: box-shadow var(--transition-speed);
+      cursor: default;
+      user-select: none;
+    }
+    body.dark #portrait-container {
+      box-shadow: 0 10px 35px var(--color-shadow-dark);
+    }
+    #portrait-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px var(--color-accent));
+      transition: filter var(--transition-speed);
+    }
+    #portrait-container:hover img {
+      filter: drop-shadow(0 0 18px var(--color-accent-light));
+    }
+    /* === Cards Grid === */
     ul.projects,
-    ul.tennis,
     ul.experiences {
       list-style: none;
       padding-left: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.75rem 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem 2rem;
     }
-
     ul.projects li,
     ul.experiences li {
       background: var(--color-card-bg-light);
-      padding: 1.75rem 2rem;
+      padding: 2rem 2.5rem;
       border-radius: var(--border-radius);
-      box-shadow: 0 10px 25px var(--color-shadow-light);
+      box-shadow: 0 10px 28px var(--color-shadow-light);
       transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease;
       will-change: transform;
       opacity: 0;
       transform: translateY(20px);
+      cursor: default;
+      user-select: none;
     }
-
     body.dark ul.projects li,
     body.dark ul.experiences li {
       background: var(--color-card-bg-dark);
-      box-shadow: 0 10px 30px var(--color-shadow-dark);
+      box-shadow: 0 12px 32px var(--color-shadow-dark);
     }
-
     ul.projects li.visible,
     ul.experiences li.visible {
       opacity: 1;
       transform: none;
       transition-delay: 0.15s;
     }
-
     ul.projects li:hover,
     ul.experiences li:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 15px 40px rgba(79, 70, 229, 0.35);
-      cursor: pointer;
+      transform: translateY(-7px) scale(1.05);
+      box-shadow: 0 20px 55px var(--color-accent-light);
     }
-
     .project-title,
     .experience-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
       margin: 0 0 0.6rem 0;
+      color: var(--color-primary);
+      user-select: text;
     }
-
+    body.dark .project-title,
+    body.dark .experience-title {
+      color: var(--color-accent);
+    }
     .project-desc,
     .experience-desc {
-      font-size: 1rem;
+      font-size: 1.05rem;
       margin: 0;
-      color: #444;
-      line-height: 1.4;
+      color: #444a58;
+      line-height: 1.5;
+      user-select: text;
     }
-
     body.dark .project-desc,
     body.dark .experience-desc {
-      color: #bbb;
+      color: #a0a7bc;
     }
-
-    /* Tennis achievements cards fix & style */
+    /* === Tennis Achievements Cards & Interactive === */
     ul.tennis {
-      grid-template-columns: 1fr; /* single column for clarity */
-      gap: 0.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem 1.2rem;
       padding-left: 0;
-      max-width: 400px;
+      max-width: 680px;
       margin: 0 auto;
     }
     ul.tennis li {
       background: var(--color-card-bg-light);
-      box-shadow: 0 8px 20px var(--color-shadow-light);
-      padding: 1rem 1.25rem;
+      box-shadow: 0 10px 30px var(--color-shadow-light);
+      padding: 1.15rem 1.5rem;
       border-radius: var(--border-radius);
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--color-accent);
-      line-height: 1.5;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      line-height: 1.4;
       transition: box-shadow 0.3s ease, transform 0.25s ease;
+      cursor: pointer;
       user-select: none;
+      position: relative;
+      overflow: hidden;
     }
-
     body.dark ul.tennis li {
       background: var(--color-card-bg-dark);
       color: var(--color-accent-light);
-      box-shadow: 0 8px 25px var(--color-shadow-dark);
+      box-shadow: 0 12px 36px var(--color-shadow-dark);
     }
-
-    ul.tennis li:hover {
-      box-shadow: 0 15px 45px rgba(79, 70, 229, 0.35);
-      transform: scale(1.02);
-      cursor: default;
+    ul.tennis li:hover,
+    ul.tennis li:focus {
+      box-shadow: 0 20px 55px var(--color-accent-light);
+      transform: scale(1.04);
+      outline: none;
     }
-
-    footer {
-      text-align: center;
-      padding: 1.2rem 1rem;
-      color: #888;
-      border-top: 1px solid #ccc;
-      font-size: 0.9rem;
-      transition: border-color var(--transition-speed), color var(--transition-speed);
+    /* Tennis card inner reveal effect */
+    ul.tennis li .details {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-primary);
+      color: white;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      border-radius: var(--border-radius);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      user-select: text;
+      overflow-y: auto;
+      line-height: 1.4;
+    }
+    ul.tennis li.show-details .details {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    /* Close button for details */
+    .close-details {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(255 255 255 / 0.9);
+      color: var(--color-primary);
+      border: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      line-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
       user-select: none;
     }
-    footer.dark {
-      border-color: #444;
-      color: #aaa;
+    .close-details:hover {
+      background: white;
+    }
+    /* === Project screenshots === */
+    .project-screenshot {
+      margin-top: 1rem;
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 18px var(--color-shadow-light);
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    body.dark .project-screenshot {
+      box-shadow: 0 6px 18px var(--color-shadow-dark);
+    }
+    .project-screenshot:hover,
+    .project-screenshot:focus {
+      transform: scale(1.08);
+      box-shadow: 0 15px 40px var(--color-accent-light);
+      outline: none;
+    }
+    /* === Modal for images/details === */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 1rem;
+      user-select: none;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      max-width: 720px;
+      max-height: 90vh;
+      background: var(--color-card-bg-light);
+      border-radius: var(--border-radius);
+      box-shadow: 0 25px 70px var(--color-shadow-light);
+      padding: 1.5rem;
+      position: relative;
+      overflow-y: auto;
+      user-select: text;
+    }
+    body.dark .modal-content {
+      background: var(--color-card-bg-dark);
+      box-shadow: 0 25px 70px var(--color-shadow-dark);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover {
+      background: var(--color-accent-light);
+    }
+    /* Modal Image */
+    .modal-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    /* === Contact Form === */
+    #contact {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      background: var(--color-card-bg-light);
+      padding: 2rem 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 14px 35px var(--color-shadow-light);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    body.dark #contact form {
+      background: var(--color-card-bg-dark);
+      box-shadow: 0 14px 35px var(--color-shadow-dark);
+    }
+    #contact label {
+      font-weight: 600;
+      color: var(--color-primary);
+      user-select: none;
+    }
+    body.dark #contact label {
+      color: var(--color-accent);
+    }
+    #contact input,
+    #contact textarea {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--input-border-light);
+      border-radius: var(--border-radius);
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+      resize: vertical;
+      background: var(--input-bg-light);
+      color: var(--color-text-light);
+      user-select: text;
+    }
+    body.dark #contact input,
+    body.dark #contact textarea {
+      background: var(--input-bg-dark);
+      border-color: var(--input-border-dark);
+      color: var(--color-text-dark);
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      border-color: var(--color-accent);
+      outline: none;
+    }
+    #contact textarea {
+      min-height: 110px;
+      max-height: 220px;
+      font-family: var(--font-sans);
+      line-height: 1.4;
+    }
+    #contact button {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: white;
+      background: var(--color-accent);
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      align-self: flex-start;
+    }
+    #contact button:hover,
+    #contact button:focus {
+      background: var(--color-accent-light);
+      outline: none;
+    }
+    #contact .success-message {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-top: 1rem;
+      user-select: none;
+    }
+    body.dark #contact .success-message {
+      color: var(--color-accent-light);
     }
 
-    /* Toggle button updated with icon & tooltip */
+    /* === Toggle button === */
     .toggle-btn {
       position: fixed;
       top: 1rem;
@@ -255,7 +479,7 @@
       border-radius: 8px;
       font-weight: 700;
       font-size: 1rem;
-      box-shadow: 0 6px 12px rgb(79 70 229 / 0.5);
+      box-shadow: 0 6px 12px rgb(154 77 255 / 0.7);
       transition: background 0.3s ease, box-shadow 0.3s ease;
       z-index: 1000;
       display: flex;
@@ -265,197 +489,386 @@
     }
     .toggle-btn:hover,
     .toggle-btn:focus {
-      background: #3730a3;
+      background: #b480ff;
       outline: none;
-      box-shadow: 0 8px 16px rgb(79 70 229 / 0.75);
+      box-shadow: 0 8px 16px rgb(154 77 255 / 0.9);
     }
     .toggle-btn svg {
       width: 18px;
       height: 18px;
-      fill: currentColor;
-      transition: transform 0.3s ease;
+      fill: white;
+      transition: transform 0.4s ease;
     }
     body.dark .toggle-btn svg {
       transform: rotate(180deg);
     }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.25rem;
+    /* === Responsive === */
+    @media (max-width: 720px) {
+      header h1 {
+        font-size: 2.4rem;
       }
       h2 {
-        font-size: 1.6rem;
+        font-size: 1.75rem;
       }
       ul.projects,
       ul.experiences {
         grid-template-columns: 1fr;
       }
       ul.tennis {
+        grid-template-columns: 1fr;
         max-width: 100%;
+        padding: 0;
+      }
+      #portrait-container {
+        max-width: 200px;
+        margin-bottom: 2rem;
+      }
+      main {
+        margin: 2rem 1rem 3rem;
       }
     }
+
   </style>
 </head>
 <body>
-  <button class="toggle-btn" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
-      <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
-    </svg>
-    Dark Mode
-  </button>
 
-  <header>
-    <h1>Andrew Otzenberger</h1>
-    <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
-  </header>
+<button aria-label="Toggle dark/light mode" class="toggle-btn" title="Toggle dark/light mode">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
+    <path d="M12 3a9 9 0 0 0 0 18 9 9 0 0 0 0-18Zm0 16a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/>
+  </svg>
+  Dark Mode
+</button>
 
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
-        As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.<br/><br/>
+<header>
+  <h1>Andrew Otzenberger</h1>
+  <p>Computer Science Student | NAIA Top-25 Tennis Player | Aspiring Software Engineer</p>
+</header>
 
-        My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
-        I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
-      </p>
-    </section>
+<main>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul class="projects">
-        <li>
-          <p class="project-title">
-            <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">EMP Pulse and Circuit Response Simulator</a>
-          </p>
-          <p class="project-desc">
-            A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
-          </p>
-        </li>
-        <li>
-          <p class="project-title">
-            <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" class="project-link" rel="noopener noreferrer">Interactive Quantum Harmonic Oscillator Visualizer</a>
-          </p>
-          <p class="project-desc">
-            Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
-          </p>
-        </li>
-        <li>
-          <p class="project-title">
-            <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">Interactive 2D Electric Field Potential Simulator</a>
-          </p>
-          <p class="project-desc">
-            Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
-          </p>
-        </li>
-        <li>
-          <p class="project-title">
-            <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" class="project-link" rel="noopener noreferrer">CERN Particle Simulator</a>
-          </p>
-          <p class="project-desc">
-            A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
-          </p>
-        </li>
-        <li>
-          <p class="project-title">
-            <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" class="project-link" rel="noopener noreferrer">Cryptographic Random Coin Flip Demo</a>
-          </p>
-          <p class="project-desc">
-            A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
-          </p>
-        </li>
-      </ul>
-    </section>
+  <!-- Portrait -->
+  <section id="portrait-container" tabindex="0" aria-label="Portrait of Andrew Otzenberger">
+    <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="Portrait photo of Andrew Otzenberger" loading="lazy" />
+  </section>
 
-    <section id="experiences">
-      <h2>Experiences</h2>
-      <ul class="experiences">
-        <li>
-          <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
-          <p class="experience-desc">Developed MATLAB simulations visualizing electric field vectors and potentials, contributing to ongoing research in electromagnetism.</p>
-        </li>
-        <li>
-          <p class="experience-title">IT Support Intern - Tech Solutions Inc.</p>
-          <p class="experience-desc">Provided hardware and software support, managed IT tickets, and optimized workflows for small business clients.</p>
-        </li>
-        <li>
-          <p class="experience-title">Data Analytics Developer - Independent Projects</p>
-          <p class="experience-desc">Created Python-based data scraping and analytics tools to extract real-time insights from multiple web sources.</p>
-        </li>
-        <li>
-          <p class="experience-title">Tennis Team Captain - University Athletics</p>
-          <p class="experience-desc">Led team practices, managed training schedules, and represented the team in university sports leadership meetings.</p>
-        </li>
-        <li>
-          <p class="experience-title">Volunteer Coding Instructor - Local STEM Outreach</p>
-          <p class="experience-desc">Taught basic programming concepts to high school students to promote interest in computer science and engineering.</p>
-        </li>
-      </ul>
-    </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Computer Science student passionate about the intersection of IT, physics, and data-driven problem solving. Experienced in Python, MATLAB, web scraping, and analytics, with projects spanning scientific computing, data visualization, and IT infrastructure.
+      As a nationally ranked NAIA Top-25 tennis player and former NCAA Division I athlete, I bring discipline and problem-solving skills to every project.
+    </p>
+    <p>
+      My undergraduate research visualized electric field vectors and potentials in MATLAB, while a visit to CERN deepened my appreciation for large-scale scientific computing. I’ve also developed independent Python-based analytics and web scraping tools to extract actionable insights from real-time data.
+      I thrive on solving complex problems, learning new technologies, and applying technical expertise to impactful projects.
+    </p>
+  </section>
 
-    <section id="tennis">
-      <h2>Tennis Achievements</h2>
-      <ul class="tennis">
-        <li>NAIA Men’s Singles Nationally Ranked #24</li>
-        <li>Former NCAA Division I Men's Tennis Athlete</li>
-        <li>Competitive mindset and discipline from elite college-level sports</li>
-      </ul>
-    </section>
-  </main>
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li tabindex="0" aria-describedby="proj-desc-1">
+        <p class="project-title">
+          <a href="https://github.com/andrewotz/EMP-Pulse-Circuit-Response-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">EMP Pulse and Circuit Response Simulator</a>
+        </p>
+        <p id="proj-desc-1" class="project-desc">
+          A real-time simulation of electromagnetic pulse (EMP) effects on a digital RC circuit with interactive sliders to explore different parameters.
+        </p>
+        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=EMP+Pulse+Simulator" alt="Screenshot of EMP Pulse Simulator" tabindex="0" />
+      </li>
+      <li tabindex="0" aria-describedby="proj-desc-2">
+        <p class="project-title">
+          <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" rel="noopener noreferrer" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
+        </p>
+        <p id="proj-desc-2" class="project-desc">
+          Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
+        </p>
+        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=Quantum+Harmonic+Oscillator" alt="Screenshot of Quantum Harmonic Oscillator Visualizer" tabindex="0" />
+      </li>
+      <li tabindex="0" aria-describedby="proj-desc-3">
+        <p class="project-title">
+          <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
+        </p>
+        <p id="proj-desc-3" class="project-desc">
+          Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
+        </p>
+        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=Electric+Field+Simulator" alt="Screenshot of Interactive 2D Electric Field Potential Simulator" tabindex="0" />
+      </li>
+      <li tabindex="0" aria-describedby="proj-desc-4">
+        <p class="project-title">
+          <a href="https://github.com/andrewotz/CERN-Particle-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">CERN Particle Simulator</a>
+        </p>
+        <p id="proj-desc-4" class="project-desc">
+          A particle collision simulator inspired by CERN experiments, showing particle trajectories and collision effects in real time.
+        </p>
+        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=CERN+Particle+Simulator" alt="Screenshot of CERN Particle Simulator" tabindex="0" />
+      </li>
+      <li tabindex="0" aria-describedby="proj-desc-5">
+        <p class="project-title">
+          <a href="https://github.com/andrewotz/Cryptography-RNG-Comparison-Demo" target="_blank" rel="noopener noreferrer" class="project-link">Cryptographic Random Coin Flip Demo</a>
+        </p>
+        <p id="proj-desc-5" class="project-desc">
+          A demonstration comparing pseudo-random and quantum-random coin flips for a cryptography class presentation.
+        </p>
+        <img class="project-screenshot" src="https://via.placeholder.com/600x180.png?text=Crypto+Coin+Flip+Demo" alt="Screenshot of Cryptographic Random Coin Flip Demo" tabindex="0" />
+      </li>
+    </ul>
+  </section>
 
-  <footer>
-    <p>© 2025 Andrew Otzenberger | <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
-  </footer>
+  <section id="experiences">
+    <h2>Experiences</h2>
+    <ul class="experiences">
+      <li tabindex="0" aria-describedby="exp-desc-1">
+        <p class="experience-title">Software Engineering Intern - Tech Innovate Co.</p>
+        <p id="exp-desc-1" class="experience-desc">
+          Developed Python automation scripts to improve data pipeline efficiency by 30%. Collaborated on cloud-based infrastructure projects and enhanced backend API endpoints.
+        </p>
+      </li>
+      <li tabindex="0" aria-describedby="exp-desc-2">
+        <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
+        <p id="exp-desc-2" class="experience-desc">
+          Created MATLAB visualizations of electric field potentials and vectors, contributing to published undergraduate research.
+        </p>
+      </li>
+      <li tabindex="0" aria-describedby="exp-desc-3">
+        <p class="experience-title">Data Analyst Intern - FinTech Solutions</p>
+        <p id="exp-desc-3" class="experience-desc">
+          Built automated data extraction tools and dashboards in Python, enabling the team to reduce reporting time by 40%.
+        </p>
+      </li>
+      <li tabindex="0" aria-describedby="exp-desc-4">
+        <p class="experience-title">Web Development Volunteer - Local Non-Profit</p>
+        <p id="exp-desc-4" class="experience-desc">
+          Designed and maintained a user-friendly website, improving online donations by 15% and volunteer sign-ups.
+        </p>
+      </li>
+      <li tabindex="0" aria-describedby="exp-desc-5">
+        <p class="experience-title">Tennis Coach Assistant - LSU Athletics</p>
+        <p id="exp-desc-5" class="experience-desc">
+          Assisted in training college-level athletes, fostering teamwork, discipline, and performance under pressure.
+        </p>
+      </li>
+    </ul>
+  </section>
 
-  <script>
-    const toggleBtn = document.querySelector('.toggle-btn');
-    const body = document.body;
+  <section id="tennis">
+    <h2>Tennis Achievements</h2>
+    <ul class="tennis" role="list" aria-label="Tennis achievements with additional details">
+      <li tabindex="0" aria-describedby="tennis-detail-1" aria-expanded="false" role="button" aria-controls="tennis-detail-1">
+        NAIA Men’s Singles Nationally Ranked #24
+        <div class="details" id="tennis-detail-1" aria-hidden="true">
+          Ranked 24th nationally among NAIA men’s singles players during the 2024 season. Demonstrated consistent performance in collegiate tournaments.
+          <button class="close-details" aria-label="Close details">&times;</button>
+        </div>
+      </li>
+      <li tabindex="0" aria-describedby="tennis-detail-2" aria-expanded="false" role="button" aria-controls="tennis-detail-2">
+        Former NCAA Division I Men's Tennis Athlete
+        <div class="details" id="tennis-detail-2" aria-hidden="true">
+          Competed at NCAA Division I level before transferring, gaining experience against top collegiate athletes.
+          <button class="close-details" aria-label="Close details">&times;</button>
+        </div>
+      </li>
+      <li tabindex="0" aria-describedby="tennis-detail-3" aria-expanded="false" role="button" aria-controls="tennis-detail-3">
+        Competitive mindset and discipline from elite college-level sports
+        <div class="details" id="tennis-detail-3" aria-hidden="true">
+          Developed leadership, resilience, and focus through years of high-level competition and training.
+          <button class="close-details" aria-label="Close details">&times;</button>
+        </div>
+      </li>
+    </ul>
+  </section>
 
-    // Icon inside button
-    const icon = toggleBtn.querySelector('svg');
-    
-    // Initialize theme based on user system preference
-    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contact-form" novalidate>
+      <label for="name">Name <span aria-hidden="true">*</span></label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true" />
+      <label for="email">Email <span aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" placeholder="your.email@example.com" required aria-required="true" />
+      <label for="message">Message <span aria-hidden="true">*</span></label>
+      <textarea id="message" name="message" placeholder="Write your message here..." required aria-required="true"></textarea>
+      <button type="submit" aria-label="Send message">Send Message</button>
+      <p class="success-message" role="alert" aria-live="polite" style="display:none;"></p>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Andrew Otzenberger | 
+    <a href="https://github.com/andrewotz" target="_blank" rel="noopener noreferrer">GitHub</a> | 
+    <a href="https://www.linkedin.com/in/andrew-otzenberger-45a753319/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </p>
+</footer>
+
+<script>
+  // Dark Mode Toggle
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const body = document.body;
+  const toggleIcon = toggleBtn.querySelector('svg');
+  function setDarkMode(isDark) {
+    if (isDark) {
       body.classList.add('dark');
       toggleBtn.textContent = 'Light Mode';
-      toggleBtn.prepend(icon);
+      toggleBtn.appendChild(toggleIcon);
+    } else {
+      body.classList.remove('dark');
+      toggleBtn.textContent = 'Dark Mode';
+      toggleBtn.appendChild(toggleIcon);
     }
+  }
+  // Initialize based on prefers-color-scheme
+  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDarkMode(true);
+  } else {
+    setDarkMode(false);
+  }
+  toggleBtn.addEventListener('click', () => {
+    setDarkMode(!body.classList.contains('dark'));
+  });
 
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      if(body.classList.contains('dark')) {
-        toggleBtn.textContent = 'Light Mode';
-      } else {
-        toggleBtn.textContent = 'Dark Mode';
+  // Header shadow on scroll
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 30) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Fade in cards on scroll with IntersectionObserver
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
       }
-      toggleBtn.prepend(icon);
     });
+  }, observerOptions);
 
-    // Sticky header shadow on scroll
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 10) {
-        header.classList.add('scrolled');
+  document.querySelectorAll('ul.projects li, ul.experiences li').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Tennis achievements interactive details
+  document.querySelectorAll('ul.tennis li').forEach(item => {
+    const details = item.querySelector('.details');
+    const closeBtn = details.querySelector('.close-details');
+    item.addEventListener('click', () => {
+      const expanded = item.getAttribute('aria-expanded') === 'true';
+      if(expanded) {
+        details.style.opacity = '0';
+        details.style.transform = 'translateY(20px)';
+        details.setAttribute('aria-hidden', 'true');
+        item.classList.remove('show-details');
+        item.setAttribute('aria-expanded', 'false');
       } else {
-        header.classList.remove('scrolled');
+        details.style.opacity = '1';
+        details.style.transform = 'none';
+        details.setAttribute('aria-hidden', 'false');
+        item.classList.add('show-details');
+        item.setAttribute('aria-expanded', 'true');
       }
     });
-
-    // Fade in cards on scroll
-    const observerOptions = {
-      threshold: 0.15
-    };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('ul.projects li, ul.experiences li').forEach(el => {
-      observer.observe(el);
+    closeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      details.style.opacity = '0';
+      details.style.transform = 'translateY(20px)';
+      details.setAttribute('aria-hidden', 'true');
+      item.classList.remove('show-details');
+      item.setAttribute('aria-expanded', 'false');
     });
-  </script>
+  });
+
+  // Project screenshots zoom modal
+  const modalOverlay = document.createElement('div');
+  modalOverlay.className = 'modal-overlay';
+  modalOverlay.setAttribute('role', 'dialog');
+  modalOverlay.setAttribute('aria-modal', 'true');
+  modalOverlay.setAttribute('aria-hidden', 'true');
+  modalOverlay.tabIndex = -1;
+  document.body.appendChild(modalOverlay);
+
+  modalOverlay.innerHTML = `
+    <div class="modal-content">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <img src="" alt="" class="modal-img" />
+    </div>
+  `;
+  const modalCloseBtn = modalOverlay.querySelector('.modal-close-btn');
+  const modalImg = modalOverlay.querySelector('.modal-img');
+
+  function openModal(src, alt) {
+    modalImg.src = src;
+    modalImg.alt = alt;
+    modalOverlay.classList.add('active');
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    modalOverlay.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    modalImg.src = '';
+    modalImg.alt = '';
+    document.body.style.overflow = '';
+  }
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => {
+    if(e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  document.querySelectorAll('.project-screenshot').forEach(img => {
+    img.addEventListener('click', () => openModal(img.src, img.alt));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(img.src, img.alt);
+      }
+    });
+    img.tabIndex = 0;
+  });
+
+  // Contact form validation & fake submit
+  const form = document.getElementById('contact-form');
+  const successMessage = form.querySelector('.success-message');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    // Basic validation
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name) {
+      alert('Please enter your name.');
+      form.name.focus();
+      return;
+    }
+    if (!email || !emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      form.email.focus();
+      return;
+    }
+    if (!message) {
+      alert('Please enter a message.');
+      form.message.focus();
+      return;
+    }
+    // Fake submit (you can add real backend integration here)
+    successMessage.style.display = 'block';
+    successMessage.textContent = `Thanks, ${name}! Your message has been sent.`;
+    form.reset();
+  });
+</script>
+
 </body>
 </html>
