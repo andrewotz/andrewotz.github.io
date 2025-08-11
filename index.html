@@ -5,42 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Andrew Otzenberger | Portfolio</title>
 <style>
+  /* Root Colors & Variables */
   :root {
-    --color-bg-light: #f9f9f9;
+    --color-bg-light: #f9f9fb;
     --color-bg-dark: #121212;
     --color-text-light: #222;
     --color-text-dark: #eee;
     --color-accent: #4f46e5;
-    --transition-speed: 0.3s;
+    --color-accent-light: #6366f1;
+    --color-card-bg-light: #ffffff;
+    --color-card-bg-dark: #1e1e2f;
+    --color-shadow-light: rgba(0, 0, 0, 0.1);
+    --color-shadow-dark: rgba(0, 0, 0, 0.8);
+    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition-speed: 0.35s;
+    --border-radius: 12px;
+    --max-width: 900px;
   }
+
+  /* Base Reset */
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--color-bg-light);
     color: var(--color-text-light);
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   body.dark {
     background-color: var(--color-bg-dark);
     color: var(--color-text-dark);
   }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  a:hover,
+  a:focus {
+    color: var(--color-accent-light);
+    outline: none;
+    text-decoration: underline;
+  }
+
   header {
-    padding: 2rem 1rem 1rem;
+    padding: 3rem 1.5rem 2rem;
     text-align: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+    transition: border-color var(--transition-speed);
+    background: transparent;
   }
-  header.dark {
-    border-color: #444;
+
+  body.dark header {
+    border-color: #333;
   }
+
   h1 {
     margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
+
   h2 {
-    margin-top: 0;
     color: var(--color-accent);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 2rem;
   }
+
+  header p {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    color: #555;
+  }
+
+  body.dark header p {
+    color: #bbb;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 2.5rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+
+  section {
+    margin-bottom: 4rem;
+  }
+
+  /* Card Styles for Projects, Tennis, Experiences */
+  ul.projects,
+  ul.tennis,
+  ul.experiences {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem 1.5rem;
+  }
+
+  ul.projects li,
+  ul.tennis li,
+  ul.experiences li {
+    background: var(--color-card-bg-light);
+    padding: 1.5rem 1.75rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px var(--color-shadow-light);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease;
+  }
+
+  body.dark ul.projects li,
+  body.dark ul.tennis li,
+  body.dark ul.experiences li {
+    background: var(--color-card-bg-dark);
+    box-shadow: 0 10px 30px var(--color-shadow-dark);
+  }
+
+  ul.projects li:hover,
+  ul.tennis li:hover,
+  ul.experiences li:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(79, 70, 229, 0.35);
+  }
+
+  .project-title,
+  .experience-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem 0;
+  }
+
+  .project-desc,
+  .experience-desc {
+    font-size: 1rem;
+    margin: 0;
+    color: #444;
+  }
+
+  body.dark .project-desc,
+  body.dark .experience-desc {
+    color: #bbb;
+  }
+
   .toggle-btn {
     position: fixed;
     top: 1rem;
@@ -48,70 +164,56 @@
     background: var(--color-accent);
     border: none;
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1.25rem;
     cursor: pointer;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: background 0.3s;
-    z-index: 1000;
-  }
-  .toggle-btn:hover {
-    background: #3730a3;
-  }
-  main {
-    max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-  }
-  section {
-    margin-bottom: 3rem;
-  }
-  ul.projects, ul.tennis {
-    list-style: none;
-    padding-left: 0;
-  }
-  ul.projects li, ul.tennis li {
-    margin-bottom: 1rem;
-    background: #e0e7ff;
-    padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgb(79 70 229 / 0.2);
-    transition: background 0.3s;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 6px 12px rgb(79 70 229 / 0.5);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+    user-select: none;
   }
-  body.dark ul.projects li, body.dark ul.tennis li {
-    background: #1e1e2f;
-    box-shadow: 0 2px 8px rgb(79 70 229 / 0.6);
+  .toggle-btn:hover,
+  .toggle-btn:focus {
+    background: #3730a3;
+    outline: none;
+    box-shadow: 0 8px 16px rgb(79 70 229 / 0.75);
   }
-  a.project-link {
-    color: var(--color-accent);
+
+  /* Tennis list style simpler */
+  ul.tennis li {
+    background: none;
+    box-shadow: none;
+    padding: 0.25rem 0;
     font-weight: 600;
-    text-decoration: none;
+    font-size: 1.05rem;
+    color: var(--color-accent);
   }
-  a.project-link:hover {
-    text-decoration: underline;
+
+  body.dark ul.tennis li {
+    color: var(--color-accent-light);
   }
-  .project-title {
-    font-size: 1.2rem;
-    margin: 0 0 0.5rem 0;
-  }
-  .project-desc {
-    margin: 0.25rem 0 0;
-    font-size: 0.95rem;
-    line-height: 1.3;
-  }
+
   footer {
     text-align: center;
-    padding: 1rem 0;
+    padding: 1.2rem 1rem;
     color: #888;
     border-top: 1px solid #ccc;
+    font-size: 0.9rem;
+    transition: border-color var(--transition-speed), color var(--transition-speed);
   }
   footer.dark {
     border-color: #444;
     color: #aaa;
   }
+
   @media (max-width: 600px) {
     h1 {
-      font-size: 2rem;
+      font-size: 2.25rem;
+    }
+    h2 {
+      font-size: 1.6rem;
     }
   }
 </style>
@@ -149,7 +251,7 @@
       </li>
       <li>
         <p class="project-title">
-          <a href="https://github.com/andrewotz/https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
+          <a href="https://github.com/andrewotz/Interactive-Quantum-Harmonic-Oscillator-Visualization" target="_blank" class="project-link">Interactive Quantum Harmonic Oscillator Visualizer</a>
         </p>
         <p class="project-desc">
           Interactive plots of wavefunctions and probability densities of quantum harmonic oscillator energy states, demonstrating fundamental quantum physics concepts.
@@ -157,7 +259,7 @@
       </li>
       <li>
         <p class="project-title">
-          <a href="https://github.com/andrewotz/https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
+          <a href="https://github.com/andrewotz/Interactive-2D-Electric-Field-Potential-Simulator" target="_blank" class="project-link">Interactive 2D Electric Field Potential Simulator</a>
         </p>
         <p class="project-desc">
           Visualizes electric fields and potential in a 2D plane generated by multiple point charges. Users can dynamically adjust charge positions and magnitudes through an interactive interface, gaining intuitive insight into electrostatic phenomena. Ideal for physics education and exploring fundamental concepts of electromagnetism.
@@ -182,6 +284,32 @@
     </ul>
   </section>
 
+  <section id="experiences">
+    <h2>Experiences</h2>
+    <ul class="experiences">
+      <li>
+        <p class="experience-title">Undergraduate Research Assistant - LSU Physics Dept.</p>
+        <p class="experience-desc">Developed MATLAB simulations visualizing electric field vectors and potentials, contributing to ongoing research in electromagnetism.</p>
+      </li>
+      <li>
+        <p class="experience-title">IT Support Intern - Tech Solutions Inc.</p>
+        <p class="experience-desc">Provided hardware and software support, managed IT tickets, and optimized workflows for small business clients.</p>
+      </li>
+      <li>
+        <p class="experience-title">Data Analytics Developer - Independent Projects</p>
+        <p class="experience-desc">Created Python-based data scraping and analytics tools to extract real-time insights from multiple web sources.</p>
+      </li>
+      <li>
+        <p class="experience-title">Tennis Team Captain - University Athletics</p>
+        <p class="experience-desc">Led team practices, managed training schedules, and represented the team in university sports leadership meetings.</p>
+      </li>
+      <li>
+        <p class="experience-title">Volunteer Coding Instructor - Local STEM Outreach</p>
+        <p class="experience-desc">Taught basic programming concepts to high school students to promote interest in computer science and engineering.</p>
+      </li>
+    </ul>
+  </section>
+
   <section id="tennis">
     <h2>Tennis Achievements</h2>
     <ul class="tennis">
@@ -200,7 +328,7 @@
   const toggleBtn = document.querySelector('.toggle-btn');
   const body = document.body;
 
-  // Initialize based on user preference or default to light
+  // Initialize theme based on user system preference
   if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     body.classList.add('dark');
     toggleBtn.textContent = 'Light Mode';
@@ -208,13 +336,8 @@
 
   toggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark');
-    if(body.classList.contains('dark')) {
-      toggleBtn.textContent = 'Light Mode';
-    } else {
-      toggleBtn.textContent = 'Dark Mode';
-    }
+    toggleBtn.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
   });
 </script>
-
 </body>
 </html>
